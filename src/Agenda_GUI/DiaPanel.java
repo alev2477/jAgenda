@@ -56,4 +56,10 @@ public class DiaPanel extends JPanel {
     public String getdaylabel() {
         return daylabel.getText();
     }
+    
+    public DiaPanel getPanelDiaobj(){
+    return this;
+    }
+    
+    
 }

@@ -15,9 +15,9 @@ import java.util.Date;
  */
 public final class Dia {
 
-    private  Date               Fecha;
-    private  ArrayList<Cita>    ListaTareas;
-    private  int                intDia;
+    private Date Fecha;
+    private ArrayList<Cita> ListaTareas;
+    private int intDia;
 
     /**
      * Constructor sin parametro para hora actual
@@ -26,42 +26,44 @@ public final class Dia {
         /*Sin parametro fecha actual del sistema*/
         this.actualfecha();
         ListaTareas = new ArrayList<Cita>();
-        
 
     }
 
     /**
-     * Dia(Date date) 
-        Con parametro date, se emplea metodos de conversion
-        fecha actual del sistema
-     * @param date 
+     * Dia(Date date) Con parametro date, se emplea metodos de conversion fecha
+     * actual del sistema
+     *
+     * @param date
      */
     public Dia(Date date) {
-        
+
         Fecha = date;
         ListaTareas = new ArrayList<Cita>();
 
     }
-/** 
- * Dia(Date date)
- * Con parametro date, se emplea metodos de conversion
- * fecha actual del sistema
- * @param date 
- */
+
+    /**
+     * Dia(Date date) Con parametro date, se emplea metodos de conversion fecha
+     * actual del sistema
+     *
+     * @param date
+     */
     public Dia(String date) {
         /*Parametro String*/
 
     }
-public void setintdia(int dia){
-    intDia = dia;
-}
-public int getintdia(){
-    return intDia;
-}
 
+    public void setintdia(int dia) {
+        intDia = dia;
+    }
+
+    public int getintdia() {
+        return intDia;
+    }
 
     /**
-     * agregarNuevaTareaLista(String Tarea, String Hora) 
+     * agregarNuevaTareaLista(String Tarea, String Hora)
+     *
      * @param Tarea
      * @param Hora
      */
@@ -71,10 +73,11 @@ public int getintdia(){
         ListaTareas.add(NuevaTarea);
     }
 
-    public  ArrayList<Cita> getTareas(){
+    public ArrayList<Cita> getTareas() {
         return ListaTareas;
-    
+
     }
+
     public int setfechaString(String fecha) throws ParseException {
 
         Fecha = Convertodate(fecha);

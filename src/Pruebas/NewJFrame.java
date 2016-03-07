@@ -5,6 +5,11 @@
  */
 package Pruebas;
 
+import Agenda_GUI.Agenda;
+import Agenda_GUI.DiaPanel;
+import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
+
 /**
  *
  * @author alev2477
@@ -16,9 +21,33 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
-        calendarioGUI1.initIU(this);
+
+       agenda1.initIU(this);//una manera de capturar el evento no satisfactorio
+//        JPanel panelAux = new JPanel();
+//        panelAux = agenda1.getPanelCalendario();
+        final DiaPanel[] panelDiaAuxorigen = agenda1.getPaneldia();
+//        agenda1.getPaneldia();
+        final int count = agenda1.getPanelCalendario().getComponentCount();
+        for (int i = 0; i < count; i++) {
+            //final JPanel panelDiaAux = (JPanel) panelAux.getComponent(i);
+            panelDiaAuxorigen[i].addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    for (int i = 0; i <= agenda1.Agenda.getdiaenmes(); i++) {
+
+                        if (e.getSource() == panelDiaAuxorigen[i]) {
+                                 //panelDiaAuxorigen[i].setdaylabel("POR FIN " + Integer.toString(count));
+                                 //jTextField1.setText(panelDiaAuxorigen[i].getdaylabel());
+                                 jTextField1.setText(agenda1.Agenda.CalendarioMensual[i].getFechaString());
+                        }
+                    }
+                }
+            }
+            );
+        }
     }
-    public void mostrarcliking(String Cliked){
+
+    public void mostrarcliking(String Cliked) {
         jTextField1.setText(Cliked);
     }
 
@@ -34,8 +63,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        calendarioGUI1 = new Agenda_GUI.IguAgenda();
         jButton3 = new javax.swing.JButton();
+        agenda1 = new Agenda_GUI.Agenda();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,17 +101,15 @@ public class NewJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(calendarioGUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(jButton3)
@@ -91,18 +118,20 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jButton1)
-                .addGap(55, 55, 55)
-                .addComponent(jButton2)
-                .addGap(69, 69, 69)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 53, Short.MAX_VALUE)
-                .addComponent(calendarioGUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jButton1)
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton2)
+                        .addGap(69, 69, 69)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,28 +139,28 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //se debe validar que se haya realizado la cita correctamente o con error
-        calendarioGUI1.Agenda.Hacercita("20/02/2016", "Cocinar", "16:00");
-        calendarioGUI1.Agenda.Hacercita("20/02/2016", "Lavar", "16:00");
-        calendarioGUI1.Agenda.Hacercita("20/02/2016", "Lavar", "16:00");
-        calendarioGUI1.Agenda.Hacercita("10/02/2016", "Cocinar", "16:00");
-        calendarioGUI1.Agenda.Hacercita("20/02/2016", "Cocinar", "16:00");
-        calendarioGUI1.Agenda.Hacercita("15/02/2016", "Cocinar", "16:00");
-        calendarioGUI1.Agenda.Hacercita("20/03/2016", "Cocinar", "16:00");
-        calendarioGUI1.Agenda.imprimirTareasMes("20/02/2016");
+        agenda1.Agenda.Hacercita("20/02/2016", "Cocinar", "16:00");
+        agenda1.Agenda.Hacercita("20/02/2016", "Lavar", "16:00");
+        agenda1.Agenda.Hacercita("20/02/2016", "Lavar", "16:00");
+        agenda1.Agenda.Hacercita("10/02/2016", "Cocinar", "16:00");
+        agenda1.Agenda.Hacercita("20/02/2016", "Cocinar", "16:00");
+        agenda1.Agenda.Hacercita("15/02/2016", "Cocinar", "16:00");
+        agenda1.Agenda.Hacercita("20/03/2016", "Cocinar", "16:00");
+        agenda1.Agenda.imprimirTareasMes("20/02/2016");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        calendarioGUI1.MostrarTareasxDia("20/03/2016");
-        calendarioGUI1.MostrarTareasxDia("10/02/2016");
-        calendarioGUI1.MostrarTareasxDia("15/02/2016");
+        agenda1.MostrarTareasxDia("20/03/2016");
+        agenda1.MostrarTareasxDia("10/02/2016");
+        agenda1.MostrarTareasxDia("15/02/2016");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-      jTextField1.setText( calendarioGUI1.TareaSeleccionada); // TODO add your handling code here:
+        jTextField1.setText(agenda1.TareaSeleccionada); // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        calendarioGUI1.actualizarCalendarioGUI("12/10/2016");
+        agenda1.actualizarCalendario("12/10/2016");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -165,14 +194,13 @@ public class NewJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
-                
-               
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Agenda_GUI.IguAgenda calendarioGUI1;
+    private Agenda_GUI.Agenda agenda1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

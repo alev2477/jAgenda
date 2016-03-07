@@ -18,9 +18,12 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author alev2477
+ * @author alev2477 (Alejandro Villalobos) 
+ * @version 0.1
+ * @since 2016
+ * @email alev2477@gmail.com
  */
-public class IguAgenda extends JPanel implements MouseListener {
+public class Agenda extends JPanel implements MouseListener {
 
     public NewJFrame creador;
     static private JPanel panelcalendario;
@@ -30,7 +33,7 @@ public class IguAgenda extends JPanel implements MouseListener {
 
     private final DiaPanel[] panelday = new DiaPanel[42];
 
-    static int ALTO = 500, ANCHO = 500;
+    static int ALTO = 400, ANCHO = 750;
 
     private static final String[] diasdelasemana = new String[]{
         "dom",
@@ -51,7 +54,7 @@ public class IguAgenda extends JPanel implements MouseListener {
         creador = refjFramebase;
     }
 
-    public IguAgenda() {
+    public Agenda() {
         Agenda = new Calendario();
 
 //        try {
@@ -62,7 +65,7 @@ public class IguAgenda extends JPanel implements MouseListener {
         Agenda.setCalendario();
         Agenda.printcalendar();
         this.crearGUI();
-        panelcalendario.setPreferredSize(new Dimension(ALTO, ANCHO));
+        panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
 
         /**
          * cuando la ventana cambie de tama;o en tiempo de dise;o para ajustar
@@ -85,12 +88,12 @@ public class IguAgenda extends JPanel implements MouseListener {
 //        });
     }
 
-    public void actualizarCalendarioGUI(String Fecha) {
+    public void actualizarCalendario(String Fecha) {
 
         try {
             Agenda.setCalendario(Fecha);
         } catch (ParseException ex) {
-            Logger.getLogger(IguAgenda.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
         }
         Agenda.printcalendar();
         for (int i = 0; i <= Agenda.getdiaenmes(); i++) {
@@ -152,6 +155,15 @@ public class IguAgenda extends JPanel implements MouseListener {
 
     }
 
+    public JPanel getPanelCalendario() {
+        return (JPanel) panelcalendario;
+
+    }
+
+    public DiaPanel[] getPaneldia() {
+        return panelday;
+    }
+
     public void MostrarTareasxDia(String Fecha) {
         final int indice = Agenda.buscarfecha(Fecha);//indice en matriz calendario
         ArrayList<Cita> Lista;
@@ -211,7 +223,7 @@ public class IguAgenda extends JPanel implements MouseListener {
 
             if (e.getSource() == panelday[i]) {
 
-                // panelday[i].setdaylabel("Press " + Integer.toString(i));
+                //  panelday[i].setdaylabel("Press " + Integer.toString(i));
             }
             // if  (e.getSource() == 1)
         }
