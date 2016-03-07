@@ -7,10 +7,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -18,92 +18,73 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author alev2477 (Alejandro Villalobos) 
+ * @author alev2477 (Alejandro Villalobos)
  * @version 0.1
  * @since 2016
  * @email alev2477@gmail.com
  */
-public class Agenda extends JPanel implements MouseListener {
+public class Agenda extends JPanel {
 
     public NewJFrame creador;
     static private JPanel panelcalendario;
-    public Calendario Agenda;
-    private javax.swing.JLabel labelTareas;//no debe estar en esta clase debe estar en diapanel, se debe cosntruir todo el panel del dia.
+    public Calendario CalendarioAgenda;
+    private javax.swing.JLabel labelTareas;
     public String TareaSeleccionada;
-
     private final DiaPanel[] panelday = new DiaPanel[42];
-
     static int ALTO = 400, ANCHO = 750;
-
-    private static final String[] diasdelasemana = new String[]{
-        "dom",
-        "lun",
-        "mar",
-        "mie",
-        "jue",
-        "vie",
-        "sab"};
+    protected Locale locale;
+    protected final String[] diasdelasemana;
 
     /**
-     * Metodo para iniciar la interfaz grafica desde un frame, recibe la
-     * referencia del jFrame asociado a presentar el calendario
-     *
-     * @param refjFramebase
+     * Constructor de Clase Agenda
      */
-    public void initIU(NewJFrame refjFramebase) {
-        creador = refjFramebase;
-    }
-
     public Agenda() {
-        Agenda = new Calendario();
-
-//        try {
-//            Agenda.setCalendario("20/12/2016");
-//        } catch (ParseException ex) {
-//            Logger.getLogger(CalendarioGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        Agenda.setCalendario();
-        Agenda.printcalendar();
+        CalendarioAgenda = new Calendario();
+        locale = Locale.getDefault();
+        DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+        diasdelasemana = dateFormatSymbols.
+                getShortWeekdays();
+        CalendarioAgenda.setCalendario();
+        CalendarioAgenda.printcalendar();
         this.crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
-
-        /**
-         * cuando la ventana cambie de tama;o en tiempo de dise;o para ajustar
-         * el panel calendario adecuadamente
-         */
 //        addComponentListener(new java.awt.event.ComponentAdapter() {
-//
 //            @Override
 //            public void componentResized(java.awt.event.ComponentEvent evt) {
-//               
 //                    ANCHO = getWidth();
 //                    ALTO = getHeight();
 //                    setSize(ANCHO, ALTO);
 //                    System.out.println("Se cambia ALTURA" + Integer.toString(ALTO)
 //                            + " " + "ANCHO " + Integer.toString(ANCHO));
 //                    panelcalendario.setPreferredSize(new Dimension(ALTO, ANCHO));
-//                    
-//                
 //            }
 //        });
     }
 
+    /**
+     * Actualiza el Calendario actual segun una fecha determinada
+     *
+     * @param Fecha
+     */
     public void actualizarCalendario(String Fecha) {
-
+        
+        ocultarTareasxmes(null);
         try {
-            Agenda.setCalendario(Fecha);
+            CalendarioAgenda.setCalendario(Fecha);
         } catch (ParseException ex) {
-            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Agenda.class.getName()).
+                    log(Level.SEVERE, null, ex);
         }
-        Agenda.printcalendar();
-        for (int i = 0; i <= Agenda.getdiaenmes(); i++) {
-
+        
+        
+        for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i] + "  "
-                        + Integer.toString(Agenda.CalendarioMensual[i].getintdia()));
+                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
+                        + Integer.toString(CalendarioAgenda.cMensual[i].
+                                getintdia()));
             } else {
-                panelday[i].setdaylabel(Integer.toString(Agenda.CalendarioMensual[i].getintdia()));
-
+                panelday[i].setdaylabel(Integer.
+                        toString(CalendarioAgenda.cMensual[i].getintdia()));
             }
         }
         updateUI();
@@ -111,142 +92,134 @@ public class Agenda extends JPanel implements MouseListener {
 
     private void limpiar() {
         this.removeAll();
-        //this.repaint();
     }
 
     /**
-     * Metodo que determina la interfaz grafica
+     * Metodo que determina la interfaz grafica el panel calendario
      */
     private void crearGUI() {
-        /*
-         Configuracion del Panel que contiene al calendario
-         ***********************************************************/
         panelcalendario = new JPanel();
-        if (Agenda.getdiaenmes() > 35) {
+        if (CalendarioAgenda.getdiaenmes() > 35) {
             panelcalendario.setLayout(new GridLayout(6, 7, 1, 1));
         } else {
             panelcalendario.setLayout(new GridLayout(5, 7, 1, 1));
         }
         panelcalendario.setSize(new Dimension(ANCHO, ALTO));
         panelcalendario.setBackground(Color.BLUE);
-//***********************************************************************
-
-        for (int i = 0; i <= Agenda.getdiaenmes(); i++) {
-
+        for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             panelday[i] = new DiaPanel();
-
-            panelday[i].addMouseListener(this);
-
-            /**
-             * Para los primeros siete dias se asigna texto de diasdelasemana
-             */
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i] + "  "
-                        + Integer.toString(Agenda.CalendarioMensual[i].getintdia()));
+                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
+                        + Integer.toString(CalendarioAgenda.cMensual[i].
+                                getintdia()));
             } else {
-                panelday[i].setdaylabel(Integer.toString(Agenda.CalendarioMensual[i].getintdia()));
-
+                panelday[i].setdaylabel(Integer.
+                        toString(CalendarioAgenda.cMensual[i].getintdia()));
             }
             panelcalendario.add(panelday[i]);
-
         }
         /*Agregal el panel al JPanel que sirve de marco*/
         this.add(panelcalendario);
-
     }
 
+    /**
+     * Retorna referencia al panelcalendario
+     *
+     * @return
+     */
     public JPanel getPanelCalendario() {
         return (JPanel) panelcalendario;
-
     }
 
+    /**
+     * Retorna referencia del paneldia
+     *
+     * @return
+     */
     public DiaPanel[] getPaneldia() {
         return panelday;
     }
 
+    /**
+     * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
+     * etiqueta y la agrega al panel del dia.
+     *
+     * @param Fecha
+     */
     public void MostrarTareasxDia(String Fecha) {
-        final int indice = Agenda.buscarfecha(Fecha);//indice en matriz calendario
+        final int indice = CalendarioAgenda.buscarfecha(Fecha);
         ArrayList<Cita> Lista;
-
         if (indice > 0) {
-            Lista = Agenda.ListaTareasxDia(Fecha);//lista de tareas para el dia
-            // Lista = Agenda.CalendarioMensual[indice].getTareas();
-
-            /**
-             * Esto se debe hacer dentro de la clase panel
-             *
-             */
+            Lista = CalendarioAgenda.ListaTareasxDia(Fecha);
             for (final Cita Lista1 : Lista) {
                 labelTareas = new javax.swing.JLabel();
-                labelTareas.setFont(new Font(null, Font.LAYOUT_LEFT_TO_RIGHT, 10));
+                labelTareas.setFont(new Font(null,
+                        Font.LAYOUT_LEFT_TO_RIGHT, 10));
                 labelTareas.setForeground(Color.red);
                 labelTareas.setHorizontalAlignment(JLabel.LEFT);
-
-                labelTareas.addMouseListener(new java.awt.event.MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        //labelTareas.setText(Lista1.getTarea());
-
-                        System.out.print(Agenda.CalendarioMensual[indice].getFechaString() + " "
-                                + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
-                        TareaSeleccionada = Agenda.CalendarioMensual[indice].getFechaString() + " "
-                                + Lista1.getTarea() + " " + Lista1.getHora();
-                        creador.mostrarcliking(TareaSeleccionada);
-                    }
-                });
                 labelTareas.setText(Lista1.getHora() + " " + Lista1.getTarea());
-                //labelTareas.setText( Lista1.getTarea());
-                //panelday[indice].add(labelTareas, BorderLayout.LINE_END);
                 panelday[indice].add(labelTareas);
-
                 panelday[indice].updateUI();
-
-                // System.out.print("\n");
-                System.out.print(Agenda.CalendarioMensual[indice].getFechaString() + " "
+                System.out.print(CalendarioAgenda.cMensual[indice].getFechaString() + " "
                         + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
             }
         }
-
     }
 
     /**
-     * *****************Metodos de Eventos*******************************
-     */
-    /**
+     * ocultarTareasxmes, quita todas las tareas del calendario
      *
-     * @param e
+     * @param Fecha
      */
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-        for (int i = 0; i <= Agenda.getdiaenmes(); i++) {
-
-            if (e.getSource() == panelday[i]) {
-
-                //  panelday[i].setdaylabel("Press " + Integer.toString(i));
+    public void ocultarTareasxmes(String Fecha) {
+        int count = 0;
+        for (int indice = 0; indice <= CalendarioAgenda.getdiaenmes();
+                indice++) {
+            count = panelday[indice].getComponentCount();
+            if (count > 1) {
+                panelday[indice].removeAll();
+                panelday[indice].resetdaylabel();
+                if (indice < 7) {
+                    panelday[indice].setdaylabel(diasdelasemana[indice + 1]
+                            + "  " + Integer.
+                            toString(CalendarioAgenda.cMensual[indice].
+                                    getintdia()));
+                } else {
+                    panelday[indice].setdaylabel(Integer.
+                            toString(CalendarioAgenda.cMensual[indice].
+                                    getintdia()));
+                }
+                panelday[indice].repaint();
             }
-            // if  (e.getSource() == 1)
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Oculta tareas por dia, busca el indice en el calendario. ubica el dia,
+     * revisa si tiene tareas, si tiene elimina las etiquetas a partir del
+     * segundo elemento, ya que el primero es la etiqueta que muestra el dia o
+     * el nombre del dia
+     *
+     * @param Fecha
+     */
+    public void ocultarTareasxDia(String Fecha) {
+        final int indice = CalendarioAgenda.buscarfecha(Fecha);
+        if (indice > 0) {
+            int count = panelday[indice].getComponentCount();
+            if (count > 1) {
+                panelday[indice].removeAll();
+                panelday[indice].resetdaylabel();
+                if (indice < 7) {
+                    panelday[indice].setdaylabel(diasdelasemana[indice + 1] + "  "
+                            + Integer.toString(CalendarioAgenda.cMensual[indice].
+                                    getintdia()));
+                } else {
+                    panelday[indice].setdaylabel(Integer.
+                            toString(CalendarioAgenda.cMensual[indice].
+                                    getintdia()));
+                }
+                panelday[indice].repaint();
+            }
+        }
     }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

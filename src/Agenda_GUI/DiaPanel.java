@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 public class DiaPanel extends JPanel {
 
     private JLabel daylabel;
+    
+     int HIGHT = 10,
+                WIDTH = 10;
 
     public DiaPanel() {
 
@@ -31,17 +34,16 @@ public class DiaPanel extends JPanel {
     }
 
     private void makeHMI() {
-        int HIGHT = 10,
-                WIDTH = 10;
+       
         daylabel = new JLabel();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         /*Esto es para realizar prueba*/
-        daylabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-              //  daylabel.setText("CLick");
-            }
-        });
+//        daylabel.addMouseListener(new java.awt.event.MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//              //  daylabel.setText("CLick");
+//            }
+//        });
         this.setBackground(Color.white);
         this.setPreferredSize(new Dimension(HIGHT, WIDTH));
         //daylabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -49,6 +51,10 @@ public class DiaPanel extends JPanel {
         this.add(daylabel);
     }
 
+    public void resetdaylabel(){
+       makeHMI();
+    
+    }
     public void setdaylabel(String day) {
         daylabel.setText(day);
     }

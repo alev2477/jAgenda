@@ -23,10 +23,10 @@ public class Calendario {
     private int annoactual;
     private int primerdiadelmes;
     private int diadelasemana;
-    public Dia CalendarioMensual[];
+    public Dia[] cMensual;
     private int DiasEnMes;
 
-    private int MatrizCalendario[];
+    private int[] intVectorCalMes;
     private final int Tamano_Matriz = 43;
     private static final String[] diasdelasemana = new String[]{
         "dom",
@@ -105,18 +105,18 @@ public class Calendario {
         }
         System.out.print("\n");
 
-        for (int i = 0; i <= MatrizCalendario[43]; i++) {
+        for (int i = 0; i <= intVectorCalMes[43]; i++) {
 
             if (i == 7 || i == 14 || i == 21 || i == 28 || i == 35) {
                 System.out.print("\n");
             }
-            valorDia = MatrizCalendario[i];
+            valorDia = intVectorCalMes[i];
             if (valorDia < 10) {
 
-                System.out.print("0" + Integer.toString(MatrizCalendario[i]) + "   ");
+                System.out.print("0" + Integer.toString(intVectorCalMes[i]) + "   ");
             } else {
 
-                System.out.print(Integer.toString(MatrizCalendario[i]) + "   ");
+                System.out.print(Integer.toString(intVectorCalMes[i]) + "   ");
             }
         }
     }
@@ -136,13 +136,13 @@ public class Calendario {
             if (i == 7 || i == 14 || i == 21 || i == 28 || i == 35) {
                 System.out.print("\n");
             }
-            valorDia = CalendarioMensual[i].getintdia();
+            valorDia = cMensual[i].getintdia();
             if (valorDia < 10) {
 
-                System.out.print("0" + Integer.toString(CalendarioMensual[i].getintdia()) + "   ");
+                System.out.print("0" + Integer.toString(cMensual[i].getintdia()) + "   ");
             } else {
 
-                System.out.print(Integer.toString(CalendarioMensual[i].getintdia()) + "   ");
+                System.out.print(Integer.toString(cMensual[i].getintdia()) + "   ");
             }
         }
     }
@@ -353,8 +353,8 @@ public class Calendario {
         int mes = this.getMesActual();
         int anno = this.getAnnoActual();
 
-        CalendarioMensual = new Dia[46];
-        MatrizCalendario = new int[46];
+        cMensual = new Dia[46];
+        intVectorCalMes = new int[46];
 
         /*Se Obtiene la fecha del primero del mes dado*/
         fecha = primerodelmes(fecha);
@@ -375,7 +375,7 @@ public class Calendario {
          */
 
         for (int j = 0; j < Tamano_Matriz - 1; j++) {
-            CalendarioMensual[j] = new Dia();
+            cMensual[j] = new Dia();
             /**
              * **********************************************************************
              */
@@ -386,12 +386,12 @@ public class Calendario {
             /**
              * **********************************************************************
              */
-            CalendarioMensual[j].setfecha(calendario.getTime());
-            CalendarioMensual[j].setintdia(this.getDiaActual());
-            MatrizCalendario[j] = (this.getDiaActual());
+            cMensual[j].setfecha(calendario.getTime());
+            cMensual[j].setintdia(this.getDiaActual());
+            intVectorCalMes[j] = (this.getDiaActual());
 
             this.getdiasiguiente(fecha);
-            MatrizCalendario[Tamano_Matriz] = j;
+            intVectorCalMes[Tamano_Matriz] = j;
             DiasEnMes = j;
 
             /**
@@ -405,7 +405,7 @@ public class Calendario {
                  * en la posicion 43 de la matriz se almacena la longitud de de
                  * la matriz
                  */
-                MatrizCalendario[Tamano_Matriz] = j;
+                intVectorCalMes[Tamano_Matriz] = j;
                 DiasEnMes = j;
 
                 /**
@@ -423,14 +423,14 @@ public class Calendario {
     }
 
     public int getTamanoMatrizactual() {
-        return this.MatrizCalendario[Tamano_Matriz];
+        return this.intVectorCalMes[Tamano_Matriz];
 
     }
 
     public void Hacercita(String Fecha, String Tarea, String Hora) {
         int indice = buscarfecha(Fecha);
         if (indice > 0) {
-            CalendarioMensual[indice].agregarNuevaTareaLista(Tarea, Hora);
+            cMensual[indice].agregarNuevaTareaLista(Tarea, Hora);
             System.out.println("Listo ya se registro la tarea\n");
         }
 
@@ -440,7 +440,7 @@ public class Calendario {
 
         String fechaAux;
         for (int i = 0; i <= DiasEnMes; i++) {
-            fechaAux = CalendarioMensual[i].getFechaString();
+            fechaAux = cMensual[i].getFechaString();
             if (fechaAux.compareTo(fecha) == 0) {
                 return i;//i es el indice del vector que corresponde con la fecha
             }
@@ -459,7 +459,7 @@ public class Calendario {
  */
     public ArrayList<Cita> ListaTareasxDia(String Fecha) {
         int indice = buscarfecha(Fecha);
-        return CalendarioMensual[indice].getTareas();
+        return cMensual[indice].getTareas();
    
     }
 
@@ -468,10 +468,10 @@ public class Calendario {
         ArrayList<Cita> Lista;
 
         if (indice > 0) {
-            Lista = CalendarioMensual[indice].getTareas();
+            Lista = cMensual[indice].getTareas();
             for (Cita Lista1 : Lista) {
                 System.out.print("\n");
-                System.out.print(CalendarioMensual[indice].getFechaString() + " "
+                System.out.print(cMensual[indice].getFechaString() + " "
                         + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
             }
         }
@@ -481,7 +481,7 @@ public class Calendario {
     public void imprimirTareasMes(String fecha) {
 
         for (int i = 0; i <= DiasEnMes; i++) {
-            imprimirTareas(CalendarioMensual[i].getFechaString());
+            imprimirTareas(cMensual[i].getFechaString());
 
         }
     }
