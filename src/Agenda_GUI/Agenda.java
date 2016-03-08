@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -60,7 +61,15 @@ public class Agenda extends JPanel {
 //            }
 //        });
     }
-
+  /**
+     * Metodo para iniciar la interfaz grafica desde un frame, recibe la
+     * referencia del jFrame asociado a presentar el calendario
+     *
+     * @param refjFramebase
+     */
+    public void initIU(NewJFrame refjFramebase) {
+        creador = refjFramebase;
+    }
     /**
      * Actualiza el Calendario actual segun una fecha determinada
      *
@@ -153,6 +162,18 @@ public class Agenda extends JPanel {
             Lista = CalendarioAgenda.ListaTareasxDia(Fecha);
             for (final Cita Lista1 : Lista) {
                 labelTareas = new javax.swing.JLabel();
+                labelTareas.addMouseListener(new java.awt.event.MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                    
+                    System.out.print("AJA ");
+                    //creador
+                    }
+                
+                
+                });
+                
                 labelTareas.setFont(new Font(null,
                         Font.LAYOUT_LEFT_TO_RIGHT, 10));
                 labelTareas.setForeground(Color.red);
