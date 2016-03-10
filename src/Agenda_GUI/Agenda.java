@@ -2,7 +2,6 @@ package Agenda_GUI;
 
 import Calendario.Calendario;
 import Calendario.Cita;
-import Pruebas.NewJFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,6 +11,8 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -24,9 +25,9 @@ import javax.swing.JPanel;
  * @since 2016
  * @email alev2477@gmail.com
  */
-public class Agenda extends JPanel {
+public class Agenda extends  JPanel implements Observer{
 
-    public NewJFrame creador;
+    public Object creador;
     static private JPanel panelcalendario;
     public Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
@@ -35,6 +36,7 @@ public class Agenda extends JPanel {
     static int ALTO = 400, ANCHO = 750;
     protected Locale locale;
     protected final String[] diasdelasemana;
+    protected ClaseObservador miObservador;
 
     /**
      * Constructor de Clase Agenda
@@ -61,13 +63,17 @@ public class Agenda extends JPanel {
 //            }
 //        });
     }
+    
+    public void addSujetoAgenda(ClaseObservador arg){
+    miObservador= arg;
+    }
   /**
      * Metodo para iniciar la interfaz grafica desde un frame, recibe la
      * referencia del jFrame asociado a presentar el calendario
      *
      * @param refjFramebase
      */
-    public void initIU(NewJFrame refjFramebase) {
+    public void initIU(Object refjFramebase) {
         creador = refjFramebase;
     }
     /**
@@ -168,6 +174,7 @@ public class Agenda extends JPanel {
                     public void mouseClicked(MouseEvent e) {
                     
                     System.out.print("AJA ");
+                    miObservador.clickonTarea(TareaSeleccionada);
                     //creador
                     }
                 
@@ -178,7 +185,8 @@ public class Agenda extends JPanel {
                         Font.LAYOUT_LEFT_TO_RIGHT, 10));
                 labelTareas.setForeground(Color.red);
                 labelTareas.setHorizontalAlignment(JLabel.LEFT);
-                labelTareas.setText(Lista1.getHora() + " " + Lista1.getTarea());
+                TareaSeleccionada =Lista1.getHora() + " " + Lista1.getTarea();
+                labelTareas.setText(TareaSeleccionada);
                 panelday[indice].add(labelTareas);
                 panelday[indice].updateUI();
                 System.out.print(CalendarioAgenda.cMensual[indice].getFechaString() + " "
@@ -243,4 +251,15 @@ public class Agenda extends JPanel {
             }
         }
     }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.print("Bueno aquivamos ");
+    }
+    
+  
+    
+    
 }
+
+ 
