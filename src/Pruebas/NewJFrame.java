@@ -5,15 +5,20 @@
  */
 package Pruebas;
 
+import Agenda_GUI.ClaseObservador;
 import Agenda_GUI.DiaPanel;
 import java.awt.event.MouseEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author alev2477
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class NewJFrame extends javax.swing.JFrame implements Observer{
 
+       ClaseObservador miObservador;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -42,6 +47,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
             );
+            
+         miObservador = new ClaseObservador();
+            agenda1.addSujetoAgenda(miObservador);
+            miObservador.addObserver(this);
+            miObservador.addObserver(agenda1);
+            
         }
     }
 
@@ -234,4 +245,10 @@ agenda1.ocultarTareasxDia("15/03/2016");
     private javax.swing.JButton jButton5;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("Se hizo un click en tareas");
+       jTextField1.setText(miObservador.getTarea());
+    }
 }
