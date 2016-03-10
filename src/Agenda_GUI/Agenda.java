@@ -2,6 +2,8 @@ package Agenda_GUI;
 
 import Calendario.Calendario;
 import Calendario.Cita;
+import Calendario.UtilFuntions;
+import com.sun.corba.se.spi.logging.CORBALogDomains;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
@@ -180,18 +183,12 @@ public class Agenda extends  JPanel implements Observer{
             for (final Cita Lista1 : Lista) {
                 labelTareas = new javax.swing.JLabel();
                 labelTareas.addMouseListener(new java.awt.event.MouseAdapter() {
-
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                    
-                    System.out.print("AJA ");
                     TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
                         + Lista1.getTarea() + " " + Lista1.getHora();
                     miObservador.clickonTarea(TareaSeleccionada);
-                    //creador
                     }
-                
-                
                 });
                 
                 labelTareas.setFont(new Font(null,
@@ -265,6 +262,27 @@ public class Agenda extends  JPanel implements Observer{
         }
     }
 
+    
+    
+    public void incrementarUnMes(){
+     
+        
+        Date fecha = CalendarioAgenda.getMesSiguiente();
+        CalendarioAgenda.setCalendario(fecha);
+        actualizarCalendario(UtilFuntions.Convertostring(fecha));
+        
+    }
+    
+    public void decrementarUnMes(){
+     
+        
+        Date fecha = CalendarioAgenda.getMesAnterior();
+        CalendarioAgenda.setCalendario(fecha);
+        actualizarCalendario(UtilFuntions.Convertostring(fecha));
+        
+    }
+    
+    
     @Override
     public void update(Observable o, Object arg) {
         System.out.print("Bueno aquivamos ");

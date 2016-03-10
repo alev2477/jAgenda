@@ -22,36 +22,7 @@ public class NewJFrame extends javax.swing.JFrame implements Observer {
      */
     public NewJFrame() {
         initComponents();
-agenda1.Init(this);
-        //agenda1.initIU(this);//una manera de capturar el evento no satisfactorio
-//        JPanel panelAux = new JPanel();
-//        panelAux = agenda1.getPanelCalendario();
-//        final DiaPanel[] panelDiaAuxorigen = agenda1.getPaneldia();
-////        agenda1.getPaneldia();
-//        final int count = agenda1.getPanelCalendario().getComponentCount();
-//        for (int i = 0; i < count; i++) {
-//            //final JPanel panelDiaAux = (JPanel) panelAux.getComponent(i);
-//            panelDiaAuxorigen[i].addMouseListener(new java.awt.event.MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                    for (int i = 0; i <= agenda1.CalendarioAgenda.getdiaenmes(); i++) {
-//
-//                        if (e.getSource() == panelDiaAuxorigen[i]) {
-//                                 //panelDiaAuxorigen[i].setdaylabel("POR FIN " + Integer.toString(count));
-//                            //jTextField1.setText(panelDiaAuxorigen[i].getdaylabel());
-//                            jTextField1.setText(agenda1.CalendarioAgenda.cMensual[i].getFechaString());
-//                        }
-//                    }
-//                }
-//            }
-//            );
-//
-////            miObservador = new ClaseObservador();
-////            agenda1.addSujetoAgenda(miObservador);
-////            miObservador.addObserver(this);
-////            miObservador.addObserver(agenda1);
-//
-//        }
+        agenda1.Init(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +36,8 @@ agenda1.Init(this);
         agenda1 = new Agenda_GUI.Agenda();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +82,20 @@ agenda1.Init(this);
             }
         });
 
+        jButton6.setText("Inc Mes");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Dec Mes");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,6 +118,12 @@ agenda1.Init(this);
                             .addComponent(jButton3)
                             .addComponent(jButton5))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(351, 351, 351)
+                .addComponent(jButton7)
+                .addGap(37, 37, 37)
+                .addComponent(jButton6)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +145,11 @@ agenda1.Init(this);
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6)
+                    .addComponent(jButton7))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,6 +191,14 @@ agenda1.Init(this);
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         agenda1.ocultarTareasxmes(null);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+agenda1.incrementarUnMes();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+agenda1.decrementarUnMes();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,12 +243,14 @@ agenda1.Init(this);
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Se hizo un click en tareas");
+       
         jTextField1.setText(agenda1.getTareaString());
     }
 }

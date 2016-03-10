@@ -174,13 +174,6 @@ public class Calendario {
     }
 
     /**
-     * *************** FIN DE PRIMEDELMES
-     * ****************************************
-     */
-    /**
-     * ***************************************************************************
-     */
-    /**
      * serdiadelasemana determina que dia de la semana es de una fecha dada
      *
      * @param dia
@@ -195,10 +188,7 @@ public class Calendario {
         return diasemana;
     }
 
-    /**
-     * ***********************Fin de
-     * setdiadelasemana*****************************
-     */
+    
     /**
      * ultimodiames
      *
@@ -235,9 +225,7 @@ public class Calendario {
         return dia;
     }
 
-    /**
-     * *********************FIN getdiaanterior********************************
-     */
+    
     /**
      * getdiasiguiente obtiene el dia siguiente a una fecha dada
      *
@@ -256,7 +244,7 @@ public class Calendario {
         return dia;
     }
 
-    public Date getmessiguiente(Date dia) {
+    public Date getmessiguiente(Date fecha) {
         calendario.set(Calendar.DATE, this.getDiaActual());
         calendario.set(Calendar.MONTH, this.getMesActual());
         calendario.set(Calendar.YEAR, this.getAnnoActual());
@@ -264,9 +252,30 @@ public class Calendario {
         this.setDiaActual(calendario.get(Calendar.DATE));
         this.setMesActual(calendario.get(Calendar.MONTH));
         this.setAnnoActual(calendario.get(Calendar.YEAR));
-        return dia;
+        return fecha;
     }
-
+ public Date getMesSiguiente() {
+        Date fecha;
+        calendario.set(Calendar.DATE, this.getDiaActual());
+        calendario.set(Calendar.MONTH, this.getMesActual());
+        calendario.set(Calendar.YEAR, this.getAnnoActual());
+        calendario.add(Calendar.MONTH, +1);
+        this.setDiaActual(calendario.get(Calendar.DATE));
+        this.setMesActual(calendario.get(Calendar.MONTH));
+        this.setAnnoActual(calendario.get(Calendar.YEAR));
+        return fecha = calendario.getTime();
+    }
+  public Date getMesAnterior() {
+        Date fecha;
+        calendario.set(Calendar.DATE, this.getDiaActual());
+        calendario.set(Calendar.MONTH, this.getMesActual());
+        calendario.set(Calendar.YEAR, this.getAnnoActual());
+        calendario.add(Calendar.MONTH, -1);
+        this.setDiaActual(calendario.get(Calendar.DATE));
+        this.setMesActual(calendario.get(Calendar.MONTH));
+        this.setAnnoActual(calendario.get(Calendar.YEAR));
+        return fecha = calendario.getTime();
+    }
     public Date getmesanterior(Date dia) {
         calendario.set(Calendar.DATE, this.getDiaActual());
         calendario.set(Calendar.MONTH, this.getMesActual());
