@@ -31,12 +31,13 @@ public class Agenda extends  JPanel implements Observer{
     static private JPanel panelcalendario;
     public Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
-    public String TareaSeleccionada;
+   private String TareaSeleccionada;
     private final DiaPanel[] panelday = new DiaPanel[42];
     static int ALTO = 400, ANCHO = 750;
     protected Locale locale;
     protected final String[] diasdelasemana;
     protected ClaseObservador miObservador;
+    protected Observer miObserver;
 
     /**
      * Constructor de Clase Agenda
@@ -67,6 +68,13 @@ public class Agenda extends  JPanel implements Observer{
     public void addSujetoAgenda(ClaseObservador arg){
     miObservador= arg;
     }
+    
+    public void Init(Observer arg){
+    miObserver = arg;
+    miObservador = new ClaseObservador();
+    miObservador.addObserver(miObserver);
+    }
+    
   /**
      * Metodo para iniciar la interfaz grafica desde un frame, recibe la
      * referencia del jFrame asociado a presentar el calendario
@@ -155,6 +163,9 @@ public class Agenda extends  JPanel implements Observer{
         return panelday;
     }
 
+    public String getTareaString(){
+    return TareaSeleccionada;
+    }
     /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
@@ -174,6 +185,8 @@ public class Agenda extends  JPanel implements Observer{
                     public void mouseClicked(MouseEvent e) {
                     
                     System.out.print("AJA ");
+                    TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
+                        + Lista1.getTarea() + " " + Lista1.getHora();
                     miObservador.clickonTarea(TareaSeleccionada);
                     //creador
                     }

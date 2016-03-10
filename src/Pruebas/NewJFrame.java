@@ -6,8 +6,6 @@
 package Pruebas;
 
 import Agenda_GUI.ClaseObservador;
-import Agenda_GUI.DiaPanel;
-import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,50 +13,47 @@ import java.util.Observer;
  *
  * @author alev2477
  */
-public class NewJFrame extends javax.swing.JFrame implements Observer{
+public class NewJFrame extends javax.swing.JFrame implements Observer {
 
-       ClaseObservador miObservador;
-    
+    ClaseObservador miObservador;
+
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
         initComponents();
-
-       //agenda1.initIU(this);//una manera de capturar el evento no satisfactorio
+agenda1.Init(this);
+        //agenda1.initIU(this);//una manera de capturar el evento no satisfactorio
 //        JPanel panelAux = new JPanel();
 //        panelAux = agenda1.getPanelCalendario();
-        final DiaPanel[] panelDiaAuxorigen = agenda1.getPaneldia();
-//        agenda1.getPaneldia();
-        final int count = agenda1.getPanelCalendario().getComponentCount();
-        for (int i = 0; i < count; i++) {
-            //final JPanel panelDiaAux = (JPanel) panelAux.getComponent(i);
-            panelDiaAuxorigen[i].addMouseListener(new java.awt.event.MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    for (int i = 0; i <= agenda1.CalendarioAgenda.getdiaenmes(); i++) {
-
-                        if (e.getSource() == panelDiaAuxorigen[i]) {
-                                 //panelDiaAuxorigen[i].setdaylabel("POR FIN " + Integer.toString(count));
-                                 //jTextField1.setText(panelDiaAuxorigen[i].getdaylabel());
-                                 jTextField1.setText(agenda1.CalendarioAgenda.cMensual[i].getFechaString());
-                        }
-                    }
-                }
-            }
-            );
-            
-         miObservador = new ClaseObservador();
-            agenda1.addSujetoAgenda(miObservador);
-            miObservador.addObserver(this);
-            miObservador.addObserver(agenda1);
-            
-        }
+//        final DiaPanel[] panelDiaAuxorigen = agenda1.getPaneldia();
+////        agenda1.getPaneldia();
+//        final int count = agenda1.getPanelCalendario().getComponentCount();
+//        for (int i = 0; i < count; i++) {
+//            //final JPanel panelDiaAux = (JPanel) panelAux.getComponent(i);
+//            panelDiaAuxorigen[i].addMouseListener(new java.awt.event.MouseAdapter() {
+//                @Override
+//                public void mouseClicked(MouseEvent e) {
+//                    for (int i = 0; i <= agenda1.CalendarioAgenda.getdiaenmes(); i++) {
+//
+//                        if (e.getSource() == panelDiaAuxorigen[i]) {
+//                                 //panelDiaAuxorigen[i].setdaylabel("POR FIN " + Integer.toString(count));
+//                            //jTextField1.setText(panelDiaAuxorigen[i].getdaylabel());
+//                            jTextField1.setText(agenda1.CalendarioAgenda.cMensual[i].getFechaString());
+//                        }
+//                    }
+//                }
+//            }
+//            );
+//
+////            miObservador = new ClaseObservador();
+////            agenda1.addSujetoAgenda(miObservador);
+////            miObservador.addObserver(this);
+////            miObservador.addObserver(agenda1);
+//
+//        }
     }
 
- 
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -173,7 +168,7 @@ public class NewJFrame extends javax.swing.JFrame implements Observer{
         agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Cocinar", "16:00");
         agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Cocinar", "10:00");
         agenda1.CalendarioAgenda.Hacercita("20/03/2016", "Cocinar", "16:00");
-         agenda1.CalendarioAgenda.Hacercita("12/04/2016", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("12/04/2016", "Cocinar", "16:00");
         agenda1.CalendarioAgenda.imprimirTareasMes("20/02/2016");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -185,7 +180,7 @@ public class NewJFrame extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        jTextField1.setText(agenda1.TareaSeleccionada); // TODO add your handling code here:
+        jTextField1.setText(agenda1.getTareaString()); // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -193,11 +188,11 @@ public class NewJFrame extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-agenda1.ocultarTareasxDia("15/03/2016");
+        agenda1.ocultarTareasxDia("15/03/2016");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    agenda1.ocultarTareasxmes(null);
+        agenda1.ocultarTareasxmes(null);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -249,6 +244,6 @@ agenda1.ocultarTareasxDia("15/03/2016");
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("Se hizo un click en tareas");
-       jTextField1.setText(miObservador.getTarea());
+        jTextField1.setText(agenda1.getTareaString());
     }
 }
