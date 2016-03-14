@@ -5,7 +5,6 @@
  */
 package Pruebas;
 
-import Agenda_GUI.ClaseObservador;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,7 +14,7 @@ import java.util.Observer;
  */
 public class NewJFrame extends javax.swing.JFrame implements Observer {
 
-    ClaseObservador miObservador;
+//    ClaseObservador miObservador;
 
     /**
      * Creates new form NewJFrame

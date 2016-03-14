@@ -3,7 +3,6 @@ package Agenda_GUI;
 import Calendario.Calendario;
 import Calendario.Cita;
 import Calendario.UtilFuntions;
-import com.sun.corba.se.spi.logging.CORBALogDomains;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
