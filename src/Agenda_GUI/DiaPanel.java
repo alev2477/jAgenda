@@ -36,6 +36,7 @@ public class DiaPanel extends JPanel {
     private void makeHMI() {
        
         daylabel = new JLabel();
+        JScrollPane jScrollPane = new JScrollPane(this);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         /*Esto es para realizar prueba*/
 //        daylabel.addMouseListener(new java.awt.event.MouseAdapter() {
