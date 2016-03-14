@@ -7,18 +7,18 @@ package Agenda_GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
  * @author alev2477
  */
 public class DiaPanel extends JPanel {
-
+//public class DiaPanel extends JScrollPane {
     private JLabel daylabel;
     
      int HIGHT = 10,
@@ -48,6 +48,7 @@ public class DiaPanel extends JPanel {
         this.setPreferredSize(new Dimension(HIGHT, WIDTH));
         //daylabel.setForeground(new java.awt.Color(255, 255, 255));
         daylabel.setForeground(Color.blue);
+       // setViewportView(daylabel);
         this.add(daylabel);
     }
 
