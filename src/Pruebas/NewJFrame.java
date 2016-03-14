@@ -253,6 +253,7 @@ agenda1.decrementarUnMes();        // TODO add your handling code here:
     @Override
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
        jTextField1.setText(agenda1.getTareaString());
+       
     }
 
    

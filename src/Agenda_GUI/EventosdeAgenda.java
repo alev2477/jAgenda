@@ -22,5 +22,11 @@ public class EventosdeAgenda extends GeneradorEventos{
         public String getTarea(){
         return Tarea;
         }
+        
+        public void clickonPanelDia(String tarea){
+        this.Tarea = tarea;
+        setChanged();
+        notifyObservers();
+        }
 
 }

@@ -1,4 +1,3 @@
-//package java.util;
 package Agenda_GUI;
 
 import java.util.Vector;

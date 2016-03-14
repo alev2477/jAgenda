@@ -122,6 +122,7 @@ public class Agenda extends  JPanel {
      * Metodo que determina la interfaz grafica el panel calendario
      */
     private void crearGUI() {
+        
         panelcalendario = new JPanel();
         if (CalendarioAgenda.getdiaenmes() > 35) {
             panelcalendario.setLayout(new GridLayout(6, 7, 1, 1));
@@ -140,6 +141,16 @@ public class Agenda extends  JPanel {
                 panelday[i].setdaylabel(Integer.
                         toString(CalendarioAgenda.cMensual[i].getintdia()));
             }
+             
+            panelday[i].addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+              miObservador.clickonTarea("Flojera de detectar el texto");
+              System.out.print("dasdasdasd");
+             // TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString() + " ";
+              
+            }
+        });
             panelcalendario.add(panelday[i]);
         }
         /*Agregal el panel al JPanel que sirve de marco*/
