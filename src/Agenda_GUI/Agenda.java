@@ -13,7 +13,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +26,7 @@ import javax.swing.JPanel;
  * @since 2016
  * @email alev2477@gmail.com
  */
-public class Agenda extends  JPanel implements Observer{
+public class Agenda extends  JPanel {
 
     public Object creador;
     static private JPanel panelcalendario;
@@ -38,8 +37,8 @@ public class Agenda extends  JPanel implements Observer{
     static int ALTO = 400, ANCHO = 750;
     protected Locale locale;
     protected final String[] diasdelasemana;
-    protected ClaseObservador miObservador;
-    protected Observer miObserver;
+    protected EventosdeAgenda miObservador;
+    protected DetectorEventosAgenda miObserver;
 
     /**
      * Constructor de Clase Agenda
@@ -67,13 +66,13 @@ public class Agenda extends  JPanel implements Observer{
 //        });
     }
     
-    public void addSujetoAgenda(ClaseObservador arg){
+    public void addSujetoAgenda(EventosdeAgenda arg){
     miObservador= arg;
     }
     
-    public void Init(Observer arg){
+    public void addEscucharEventosAgenda(DetectorEventosAgenda arg){
     miObserver = arg;
-    miObservador = new ClaseObservador();
+    miObservador = new EventosdeAgenda();
     miObservador.addObserver(miObserver);
     }
     
@@ -282,10 +281,10 @@ public class Agenda extends  JPanel implements Observer{
     }
     
     
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.print("Bueno aquivamos ");
-    }
+//    @Override
+//    public void update(Observable o, Object arg) {
+//        System.out.print("Bueno aquivamos ");
+//    }
     
   
     

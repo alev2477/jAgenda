@@ -5,23 +5,24 @@
  */
 package Pruebas;
 
-import java.util.Observable;
-import java.util.Observer;
+
+import Agenda_GUI.DetectorEventosAgenda;
+import Agenda_GUI.GeneradorEventos;
 
 /**
  *
  * @author alev2477
  */
-public class NewJFrame extends javax.swing.JFrame implements Observer {
+public class NewJFrame extends javax.swing.JFrame implements DetectorEventosAgenda {
 
-//    ClaseObservador miObservador;
+//    EventosdeAgenda miObservador;
 
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
         initComponents();
-        agenda1.Init(this);
+        agenda1.addEscucharEventosAgenda(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -247,9 +248,12 @@ agenda1.decrementarUnMes();        // TODO add your handling code here:
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
+    
+
     @Override
-    public void update(Observable o, Object arg) {
-       
-        jTextField1.setText(agenda1.getTareaString());
+    public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
+       jTextField1.setText(agenda1.getTareaString());
     }
+
+   
 }

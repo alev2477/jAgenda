@@ -1,18 +1,16 @@
 package Agenda_GUI;
 
-import java.util.Observable;
-
 
 /**
  * Clase observador donde se establece el eje central del patron
  * @author chenao
  *
  */
-public class ClaseObservador extends Observable{
+public class EventosdeAgenda extends GeneradorEventos{
 	
 
 	private String Tarea;
-	public ClaseObservador(){
+	public EventosdeAgenda(){
 		
 	}
 
