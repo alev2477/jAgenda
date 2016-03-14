@@ -10,12 +10,19 @@ public class EventosdeAgenda extends GeneradorEventos{
 	
 
 	private String Tarea;
+        private int evento;
 	public EventosdeAgenda(){
 		
 	}
-
+public int getevento(){
+return evento;
+}
+public void setevento(int evento){
+this.evento = evento;
+}
         public void clickonTarea(String tarea){
         this.Tarea = tarea;
+            setevento(1);
         setChanged();
         notifyObservers();
         }
@@ -25,6 +32,7 @@ public class EventosdeAgenda extends GeneradorEventos{
         
         public void clickonPanelDia(String tarea){
         this.Tarea = tarea;
+         setevento(2);
         setChanged();
         notifyObservers();
         }

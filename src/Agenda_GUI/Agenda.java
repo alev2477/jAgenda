@@ -13,7 +13,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -26,20 +25,23 @@ import javax.swing.JPanel;
  * @since 2016
  * @email alev2477@gmail.com
  */
-public class Agenda extends  JPanel {
+public class Agenda extends JPanel {
 
     public Object creador;
     static private JPanel panelcalendario;
     public Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
-   private String TareaSeleccionada;
+    private String TareaSeleccionada;
     private final DiaPanel[] panelday = new DiaPanel[42];
     static int ALTO = 400, ANCHO = 750;
     protected Locale locale;
     protected final String[] diasdelasemana;
     protected EventosdeAgenda miObservador;
     protected DetectorEventosAgenda miObserver;
-
+    private int evento;
+    
+    public final int CLICKTAREA =1 ;
+    public final int ClICKPANEL=2;
     /**
      * Constructor de Clase Agenda
      */
@@ -65,18 +67,28 @@ public class Agenda extends  JPanel {
 //            }
 //        });
     }
-    
-    public void addSujetoAgenda(EventosdeAgenda arg){
-    miObservador= arg;
+
+    public int getevento() {
+        return miObservador.getevento();
+                
     }
-    
-    public void addEscucharEventosAgenda(DetectorEventosAgenda arg){
-    miObserver = arg;
-    miObservador = new EventosdeAgenda();
-    miObservador.addObserver(miObserver);
+
+    public void setevento(int evento) {
+        this.evento = evento;
+
     }
-    
-  /**
+
+    public void addSujetoAgenda(EventosdeAgenda arg) {
+        miObservador = arg;
+    }
+
+    public void addEscucharEventosAgenda(DetectorEventosAgenda arg) {
+        miObserver = arg;
+        miObservador = new EventosdeAgenda();
+        miObservador.addObserver(miObserver);
+    }
+
+    /**
      * Metodo para iniciar la interfaz grafica desde un frame, recibe la
      * referencia del jFrame asociado a presentar el calendario
      *
@@ -85,13 +97,14 @@ public class Agenda extends  JPanel {
     public void initIU(Object refjFramebase) {
         creador = refjFramebase;
     }
+
     /**
      * Actualiza el Calendario actual segun una fecha determinada
      *
      * @param Fecha
      */
     public void actualizarCalendario(String Fecha) {
-        
+
         ocultarTareasxmes(null);
         try {
             CalendarioAgenda.setCalendario(Fecha);
@@ -99,8 +112,7 @@ public class Agenda extends  JPanel {
             Logger.getLogger(Agenda.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        
-        
+
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             if (i < 7) {
                 panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
@@ -114,15 +126,11 @@ public class Agenda extends  JPanel {
         updateUI();
     }
 
-    private void limpiar() {
-        this.removeAll();
-    }
-
     /**
      * Metodo que determina la interfaz grafica el panel calendario
      */
     private void crearGUI() {
-        
+
         panelcalendario = new JPanel();
         if (CalendarioAgenda.getdiaenmes() > 35) {
             panelcalendario.setLayout(new GridLayout(6, 7, 1, 1));
@@ -141,16 +149,22 @@ public class Agenda extends  JPanel {
                 panelday[i].setdaylabel(Integer.
                         toString(CalendarioAgenda.cMensual[i].getintdia()));
             }
-             
+
             panelday[i].addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-              miObservador.clickonTarea("Flojera de detectar el texto");
-              System.out.print("dasdasdasd");
-             // TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString() + " ";
-              
-            }
-        });
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
+
+                        if (e.getSource() == panelday[i]) {
+                            TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString();
+                            miObservador.clickonPanelDia(TareaSeleccionada);
+
+                        }
+                    }
+
+                }
+            });
             panelcalendario.add(panelday[i]);
         }
         /*Agregal el panel al JPanel que sirve de marco*/
@@ -175,9 +189,10 @@ public class Agenda extends  JPanel {
         return panelday;
     }
 
-    public String getTareaString(){
-    return TareaSeleccionada;
+    public String getTareaString() {
+        return TareaSeleccionada;
     }
+
     /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
@@ -194,17 +209,17 @@ public class Agenda extends  JPanel {
                 labelTareas.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                    TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
-                        + Lista1.getTarea() + " " + Lista1.getHora();
-                    miObservador.clickonTarea(TareaSeleccionada);
+                        TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
+                                + Lista1.getTarea() + " " + Lista1.getHora();
+                        miObservador.clickonTarea(TareaSeleccionada);
                     }
                 });
-                
+
                 labelTareas.setFont(new Font(null,
                         Font.LAYOUT_LEFT_TO_RIGHT, 10));
                 labelTareas.setForeground(Color.red);
                 labelTareas.setHorizontalAlignment(JLabel.LEFT);
-                TareaSeleccionada =Lista1.getHora() + " " + Lista1.getTarea();
+                TareaSeleccionada = Lista1.getHora() + " " + Lista1.getTarea();
                 labelTareas.setText(TareaSeleccionada);
                 panelday[indice].add(labelTareas);
                 panelday[indice].updateUI();
@@ -271,35 +286,20 @@ public class Agenda extends  JPanel {
         }
     }
 
-    
-    
-    public void incrementarUnMes(){
-     
-        
+    public void incrementarUnMes() {
+
         Date fecha = CalendarioAgenda.getMesSiguiente();
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
-        
+
     }
-    
-    public void decrementarUnMes(){
-     
-        
+
+    public void decrementarUnMes() {
+
         Date fecha = CalendarioAgenda.getMesAnterior();
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
-        
-    }
-    
-    
-//    @Override
-//    public void update(Observable o, Object arg) {
-//        System.out.print("Bueno aquivamos ");
-//    }
-    
-  
-    
-    
-}
 
- 
+    }
+
+}
