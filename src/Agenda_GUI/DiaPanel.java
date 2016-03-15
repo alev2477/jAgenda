@@ -45,7 +45,7 @@ public class DiaPanel extends JPanel {
 //            }
 //        });
         this.setBackground(Color.white);
-        this.setPreferredSize(new Dimension(HIGHT, WIDTH));
+        //this.setPreferredSize(new Dimension(HIGHT, WIDTH));
         //daylabel.setForeground(new java.awt.Color(255, 255, 255));
         daylabel.setForeground(Color.blue);
         this.add(daylabel);
