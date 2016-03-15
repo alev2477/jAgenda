@@ -40,8 +40,8 @@ public class Agenda extends JPanel {
     protected EventosdeAgenda miObservador;
     protected DetectorEventosAgenda miObserver;
     private int evento;
-    public   JScrollPane[] scroll =new JScrollPane[42];
-    
+    //public   JScrollPane[] scroll =new JScrollPane[42];
+    public   JScrollPane scroll ;
     public final int CLICKTAREA =1 ;
     public final int ClICKPANEL=2;
     /**
@@ -145,7 +145,12 @@ public class Agenda extends JPanel {
         panelcalendario.setBackground(Color.BLUE);
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             panelday[i] = new DiaPanel();
-            scroll[i]=new JScrollPane();
+           
+            
+            
+            
+            
+            
             if (i < 7) {
                 panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
                         + Integer.toString(CalendarioAgenda.cMensual[i].
@@ -170,12 +175,18 @@ public class Agenda extends JPanel {
 
                 }
             });
-          //  scroll[i].setAutoscrolls(true);
-           // scroll[i].setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-           // scroll[i].setViewportView(panelday[i]);
-            //panelday[i].setViewportView();
-            panelcalendario.add(panelday[i]);
-        //     panelcalendario.add(scroll[i]);
+            
+            scroll = new JScrollPane(panelday[i]);
+            scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            //scroll.setBounds(50, 30, 100, 30);
+            
+            
+//            scroll[i].setAutoscrolls(true);
+//            scroll[i].setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//            scroll[i].setViewportView(panelday[i]);
+//            panelday[i].setViewportView();
+            //panelcalendario.add(panelday[i]);
+             panelcalendario.add(scroll);
         }
         /*Agregal el panel al JPanel que sirve de marco*/
         this.add(panelcalendario);
@@ -231,8 +242,8 @@ public class Agenda extends JPanel {
                 labelTareas.setHorizontalAlignment(JLabel.LEFT);
                 TareaSeleccionada = Lista1.getHora() + " " + Lista1.getTarea();
                 labelTareas.setText(TareaSeleccionada);
-                panelday[indice].setViewportView(labelTareas);
-               // panelday[indice].add(labelTareas);
+//                panelday[indice].setViewportView(labelTareas);
+                panelday[indice].add(labelTareas);
                 panelday[indice].updateUI();
                 System.out.print(CalendarioAgenda.cMensual[indice].getFechaString() + " "
                         + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
