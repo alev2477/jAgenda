@@ -5,7 +5,7 @@
  */
 package Pruebas;
 
-import ClasesAdmin.Horario;
+import AdminEventos.Horario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

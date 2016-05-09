@@ -6,12 +6,10 @@
 package Agenda_GUI;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.BoxLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *

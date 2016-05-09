@@ -1,4 +1,4 @@
-package ClasesAdmin;
+package AdminEventos;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
