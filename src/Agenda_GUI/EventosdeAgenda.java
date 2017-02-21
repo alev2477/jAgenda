@@ -18,10 +18,11 @@ public int getevento(){
 return evento;
 }
 public void setevento(int evento){
-this.evento = evento;
-}
-        public void clickonTarea(String tarea){
-        this.Tarea = tarea;
+    this.evento = evento;
+    }
+
+public void clickonTarea(String tarea){
+    this.Tarea = tarea;
             setevento(1);
         setChanged();
         notifyObservers();

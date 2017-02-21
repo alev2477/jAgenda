@@ -28,7 +28,7 @@ import javax.swing.JScrollPane;
  */
 public class Agenda extends JPanel {
 
-    public Object creador;
+//    public Object creador; //Que hace este objeto.
     static private JPanel panelcalendario;
     public Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
@@ -37,7 +37,7 @@ public class Agenda extends JPanel {
     static int ALTO = 400, ANCHO = 750;
     protected Locale locale;
     protected final String[] diasdelasemana;
-    protected EventosdeAgenda miObservador;
+    protected EventosdeAgenda miObservado;
     protected DetectorEventosAgenda miObserver;
     private int evento;
     //public   JScrollPane[] scroll =new JScrollPane[42];
@@ -51,8 +51,7 @@ public class Agenda extends JPanel {
         CalendarioAgenda = new Calendario();
         locale = Locale.getDefault();
         DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
-        diasdelasemana = dateFormatSymbols.
-                getShortWeekdays();
+        diasdelasemana = dateFormatSymbols.getShortWeekdays();
         CalendarioAgenda.setCalendario();
         CalendarioAgenda.printcalendar();
         this.crearGUI();
@@ -73,7 +72,7 @@ public class Agenda extends JPanel {
     }
 
     public int getevento() {
-        return miObservador.getevento();
+        return miObservado.getevento();
                 
     }
 
@@ -83,24 +82,24 @@ public class Agenda extends JPanel {
     }
 
     public void addSujetoAgenda(EventosdeAgenda arg) {
-        miObservador = arg;
+        miObservado = arg;
     }
 
     public void addEscucharEventosAgenda(DetectorEventosAgenda arg) {
         miObserver = arg;
-        miObservador = new EventosdeAgenda();
-        miObservador.addObserver(miObserver);
+        miObservado = new EventosdeAgenda();
+        miObservado.addObserver(miObserver);
     }
 
-    /**
-     * Metodo para iniciar la interfaz grafica desde un frame, recibe la
-     * referencia del jFrame asociado a presentar el calendario
-     *
-     * @param refjFramebase
-     */
-    public void initIU(Object refjFramebase) {
-        creador = refjFramebase;
-    }
+//    /**
+//     * Metodo para iniciar la interfaz grafica desde un frame, recibe la
+//     * referencia del jFrame asociado a presentar el calendario
+//     *
+//     * @param refjFramebase
+//     */
+//    public void initIU(Object refjFramebase) {
+//        creador = refjFramebase;
+//    }
 
     /**
      * Actualiza el Calendario actual segun una fecha determinada
@@ -145,12 +144,6 @@ public class Agenda extends JPanel {
         panelcalendario.setBackground(Color.BLUE);
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             panelday[i] = new DiaPanel();
-           
-            
-            
-            
-            
-            
             if (i < 7) {
                 panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
                         + Integer.toString(CalendarioAgenda.cMensual[i].
@@ -168,7 +161,7 @@ public class Agenda extends JPanel {
 
                         if (e.getSource() == panelday[i]) {
                             TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString();
-                            miObservador.clickonPanelDia(TareaSeleccionada);
+                            miObservado.clickonPanelDia(TareaSeleccionada);
 
                         }
                     }
@@ -232,7 +225,7 @@ public class Agenda extends JPanel {
                     public void mouseClicked(MouseEvent e) {
                         TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
                                 + Lista1.getTarea() + " " + Lista1.getHora();
-                        miObservador.clickonTarea(TareaSeleccionada);
+                        miObservado.clickonTarea(TareaSeleccionada);
                     }
                 });
 

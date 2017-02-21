@@ -15,7 +15,7 @@ import Agenda_GUI.GeneradorEventos;
  */
 public class NewJFrame extends javax.swing.JFrame implements DetectorEventosAgenda {
 
-//    EventosdeAgenda miObservador;
+//    EventosdeAgenda miObservado;
 
     /**
      * Creates new form NewJFrame
@@ -178,28 +178,28 @@ public class NewJFrame extends javax.swing.JFrame implements DetectorEventosAgen
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //se debe validar que se haya realizado la cita correctamente o con error
-        agenda1.CalendarioAgenda.Hacercita("20/02/2016", "Cocinar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("20/02/2016", "Lavar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("20/02/2016", "Lavar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("10/03/2016", "Cocinar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("20/02/2016", "Cocinar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Cocinar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Cocinar", "10:00");
-        agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Lavar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Correr", "12:00");
-        agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Fregar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("15/03/2016", "Lavar Carro", "11:00");
+        agenda1.CalendarioAgenda.Hacercita("20/12/2016", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("20/12/2016", "Lavar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("20/12/2016", "Lavar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("10/12/2016", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("20/12/2016", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("15/12/2016", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("15/12/2016", "Cocinar", "10:00");
+        agenda1.CalendarioAgenda.Hacercita("15/12/2016", "Lavar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("15/12/2016", "Correr", "12:00");
+        agenda1.CalendarioAgenda.Hacercita("15/12/2016", "Fregar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("15/12/2016", "Lavar Carro", "11:00");
         
-        agenda1.CalendarioAgenda.Hacercita("20/03/2016", "Cocinar", "16:00");
-        agenda1.CalendarioAgenda.Hacercita("12/04/2016", "Cocinar", "16:00");
-        agenda1.CalendarioAgenda.imprimirTareasMes("20/02/2016");
+        agenda1.CalendarioAgenda.Hacercita("20/12/2016", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.Hacercita("12/01/2017", "Cocinar", "16:00");
+        agenda1.CalendarioAgenda.imprimirTareasMes("20/12/2016");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        agenda1.MostrarTareasxDia("20/03/2016");
-        agenda1.MostrarTareasxDia("10/03/2016");
-        agenda1.MostrarTareasxDia("15/03/2016");
-        agenda1.MostrarTareasxDia("12/04/2016");
+        agenda1.MostrarTareasxDia("20/12/2016");
+        agenda1.MostrarTareasxDia("10/12/2016");
+        agenda1.MostrarTareasxDia("15/12/2016");
+        agenda1.MostrarTareasxDia("12/01/2017");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

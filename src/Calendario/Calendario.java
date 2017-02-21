@@ -41,7 +41,7 @@ public class Calendario {
      *
      */
     public Calendario() {
-        actualizarfecha();
+//        actualizarfecha();
         setCalendario();
 
     }
@@ -315,22 +315,22 @@ public class Calendario {
         return dia;
     }
 
-    /**
-     * *****************************************************************************
-     * actualizarfecha(): carga fecha actual del sistema en el objeto DiaVector
-     * ***************************************************************************
-     */
-    public void actualizarfecha() {
-        calendario = new GregorianCalendar();
+//    /**
+//     * *****************************************************************************
+//     * actualizarfecha(): carga fecha actual del sistema en el objeto DiaVector
+//     * ***************************************************************************
+//     */
+//    public void actualizarfecha() {
+//        calendario = new GregorianCalendar();
+//
+//        this.setDiaActual(calendario.get(Calendar.DATE));
+//        this.setMesActual(calendario.get(Calendar.MONTH));
+//        this.setAnnoActual(calendario.get(Calendar.YEAR));
+//
+//        setdiadelasemana(calendario.getTime());
+//    }
 
-        this.setDiaActual(calendario.get(Calendar.DATE));
-        this.setMesActual(calendario.get(Calendar.MONTH));
-        this.setAnnoActual(calendario.get(Calendar.YEAR));
-
-        setdiadelasemana(calendario.getTime());
-    }
-
-    public void setCalendario() {
+   public void setCalendario() {
         Date fecha;
         calendario = new GregorianCalendar();
         fecha = calendario.getTime();
@@ -354,6 +354,7 @@ public class Calendario {
      */
     public void setCalendario(Date fecha) {
         calendario.setTime(fecha);
+        //para que si ya esta seteado la fecha en el calendario
         this.setDiaActual(calendario.get(Calendar.DATE));
         this.setMesActual(calendario.get(Calendar.MONTH));
         this.setAnnoActual(calendario.get(Calendar.YEAR));
@@ -495,4 +496,5 @@ public class Calendario {
         }
     }
 
+    
 }
