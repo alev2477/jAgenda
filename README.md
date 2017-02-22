@@ -2,4 +2,5 @@
 
 jAGENDA es un proyecto realizado en leguaje java para aprender su semantica y practicar las funcionalidades
 
-Modificado hoy por alejandro
+Esto es un proyecto con proositos didacticos .
+
