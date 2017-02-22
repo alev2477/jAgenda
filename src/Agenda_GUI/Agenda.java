@@ -57,7 +57,7 @@ public class Agenda extends JPanel {
         this.crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
         
-      /*Favor eliminar toda esta basura lo pronto*/  
+      /*Favor eliminar toda esta basura  pronto*/  
 //        addComponentListener(new java.awt.event.ComponentAdapter() {
 //            @Override
 //            public void componentResized(java.awt.event.ComponentEvent evt) {
