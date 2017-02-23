@@ -203,6 +203,81 @@ public class Agenda extends JPanel {
         return TareaSeleccionada;
     }
 
+    
+    /**
+     * MostrarMesActual()
+     * 
+     * @return Mes actual del calendario
+     */
+    public String MostrarMesActual(){
+       String result;
+        int month = CalendarioAgenda.getMesActual();
+        switch (month) {
+            case 0: {
+                result = "Enero";
+                break;
+            }
+            case 1: {
+                result = "Febrero";
+                break;
+            }
+            case 2: {
+                result = "Marzo";
+                break;
+            }
+            case 3: {
+                result = "Abril";
+                break;
+            }
+            case 4: {
+                result = "Mayo";
+                break;
+            }
+            case 5: {
+                result = "Junio";
+                break;
+            }
+            case 6: {
+                result = "Julio";
+                break;
+            }
+            case 7: {
+                result = "Agosto";
+                break;
+            }
+            case 8: {
+                result = "Septiembre";
+                break;
+            }
+            case 9: {
+                result = "Octubre";
+                break;
+            }
+            case 10: {
+                result = "Noviembre";
+                break;
+            }
+            case 11: {
+                result = "Diciembre";
+                break;
+            }
+            default: {
+                result = "Error";
+                break;
+            }
+        }
+        return result;
+               
+    }
+    
+    /**
+     * MostrarAnnoActual()
+     * 
+     */
+    public String MostrarAnnoActual(){
+        return String.valueOf(CalendarioAgenda.getAnnoActual());
+        
+    }
     /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
