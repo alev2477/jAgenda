@@ -208,6 +208,14 @@ public class Agenda extends JPanel {
     }
 
     /**
+     * MostrarMesActual()
+     * 
+     * @return Mes actual del calendario
+     */
+    public int MostrarMesActual(){
+        return CalendarioAgenda.getMesActual();
+    }
+    /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
      *
