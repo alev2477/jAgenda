@@ -8,34 +8,35 @@ package Agenda_GUI;
  */
 public class EventosdeAgenda extends GeneradorEventos{
 	
-
 	private String Tarea;
-        private int evento;
-	public EventosdeAgenda(){
-		
+    private int evento;
+	
+    
+    
+	public int getevento(){
+		return evento;
 	}
-public int getevento(){
-return evento;
-}
-public void setevento(int evento){
-    this.evento = evento;
+	
+	public void setevento(int evento){
+		this.evento = evento;
     }
 
-public void clickonTarea(String tarea){
-    this.Tarea = tarea;
-            setevento(1);
+	public void clickonTarea(String tarea){
+		this.Tarea = tarea;
+        setevento(1);
         setChanged();
         notifyObservers();
-        }
-        public String getTarea(){
+    }
+	
+    public String getTarea(){
         return Tarea;
-        }
+    }
         
-        public void clickonPanelDia(String tarea){
+    public void clickonPanelDia(String tarea){
         this.Tarea = tarea;
-         setevento(2);
+        setevento(2);
         setChanged();
         notifyObservers();
-        }
+    }
 
 }

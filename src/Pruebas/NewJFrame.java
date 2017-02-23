@@ -22,6 +22,12 @@ public class NewJFrame extends javax.swing.JFrame implements DetectorEventosAgen
      */
     public NewJFrame() {
         initComponents();
+        /*
+         * Ahora se relaciona este objeto con el generador de eventos
+         * es decir se agrega el observador (Esta clase es la clase
+         * observador
+         * 
+         * */
         agenda1.addEscucharEventosAgenda(this);
     }
 
