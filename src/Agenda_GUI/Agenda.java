@@ -28,7 +28,9 @@ import javax.swing.JScrollPane;
  */
 public class Agenda extends JPanel {
 
-//    public Object creador; //Que hace este objeto.
+
+    private static final long serialVersionUID = 1L;
+    //    public Object creador; //Que hace este objeto.
     static private JPanel panelcalendario;
     public Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
@@ -39,11 +41,13 @@ public class Agenda extends JPanel {
     protected final String[] diasdelasemana;
     protected EventosdeAgenda miObservado;
     protected DetectorEventosAgenda miObserver;
-    private int evento;
-    //public   JScrollPane[] scroll =new JScrollPane[42];
-    public   JScrollPane scroll ;
-    public final int CLICKTAREA =1 ;
-    public final int ClICKPANEL=2;
+    public JScrollPane scroll;
+    public final int CLICKTAREA = 1;
+    public final int ClICKPANEL = 2;
+    public final int INCMES     = 3;
+    public final int DECMES     = 4;
+    public final int ACTFECHA   = 5;
+
     /**
      * Constructor de Clase Agenda
      */
@@ -53,11 +57,11 @@ public class Agenda extends JPanel {
         DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
         diasdelasemana = dateFormatSymbols.getShortWeekdays();
         CalendarioAgenda.setCalendario();
-        CalendarioAgenda.printcalendar();
+      //  CalendarioAgenda.printcalendar();
         this.crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
-        
-      /*Favor eliminar toda esta basura  pronto*/  
+
+      /*Favor eliminar toda esta basura  pronto*/
 //        addComponentListener(new java.awt.event.ComponentAdapter() {
 //            @Override
 //            public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -73,11 +77,10 @@ public class Agenda extends JPanel {
 
     public int getevento() {
         return miObservado.getevento();
-                
+
     }
 
     public void setevento(int evento) {
-        this.evento = evento;
 
     }
 
@@ -85,21 +88,21 @@ public class Agenda extends JPanel {
         miObservado = arg;
     }
 
+    /**
+     * Se agrega al observador
+     * miObserver es el observador
+     * miObservado es el sujeto y el sujeto es los paneles de la agenda
+     *
+     * @param arg
+     **/
     public void addEscucharEventosAgenda(DetectorEventosAgenda arg) {
         miObserver = arg;
-        miObservado = new EventosdeAgenda();
+         if (miObservado == null)
+             miObservado = new EventosdeAgenda();
+
         miObservado.addObserver(miObserver);
     }
 
-//    /**
-//     * Metodo para iniciar la interfaz grafica desde un frame, recibe la
-//     * referencia del jFrame asociado a presentar el calendario
-//     *
-//     * @param refjFramebase
-//     */
-//    public void initIU(Object refjFramebase) {
-//        creador = refjFramebase;
-//    }
 
     /**
      * Actualiza el Calendario actual segun una fecha determinada
@@ -168,12 +171,12 @@ public class Agenda extends JPanel {
 
                 }
             });
-            
+
             scroll = new JScrollPane(panelday[i]);
             scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
             //scroll.setBounds(50, 30, 100, 30);
-            
-            
+
+
 //            scroll[i].setAutoscrolls(true);
 //            scroll[i].setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 //            scroll[i].setViewportView(panelday[i]);
@@ -182,6 +185,7 @@ public class Agenda extends JPanel {
              panelcalendario.add(scroll);
         }
         /*Agregal el panel al JPanel que sirve de marco*/
+
         this.add(panelcalendario);
     }
 
@@ -207,6 +211,82 @@ public class Agenda extends JPanel {
         return TareaSeleccionada;
     }
 
+
+    /**
+     * MostrarMesActual()
+     *
+     * @return Mes actual del calendario
+     */
+    public String MostrarMesActual(){
+       String mesTexto;
+        int mes = CalendarioAgenda.getMesActual();
+        switch (mes) {
+            case 0: {
+                mesTexto = "Enero";
+                break;
+            }
+            case 1: {
+                mesTexto = "Febrero";
+                break;
+            }
+            case 2: {
+                mesTexto = "Marzo";
+                break;
+            }
+            case 3: {
+                mesTexto = "Abril";
+                break;
+            }
+            case 4: {
+                mesTexto = "Mayo";
+                break;
+            }
+            case 5: {
+                mesTexto = "Junio";
+                break;
+            }
+            case 6: {
+                mesTexto = "Julio";
+                break;
+            }
+            case 7: {
+                mesTexto = "Agosto";
+                break;
+            }
+            case 8: {
+                mesTexto = "Septiembre";
+                break;
+            }
+            case 9: {
+                mesTexto = "Octubre";
+                break;
+            }
+            case 10: {
+                mesTexto = "Noviembre";
+                break;
+            }
+            case 11: {
+                mesTexto = "Diciembre";
+                break;
+            }
+            default: {
+                mesTexto = "Error";
+                break;
+            }
+        }
+        return mesTexto;
+
+    }
+
+    /**
+     * MostrarAnnoActual()
+     *
+     * @return CalendarioAgenda.getAnnoActual()
+     */
+    public String MostrarAnnoActual(){
+        return String.valueOf(CalendarioAgenda.getAnnoActual());
+
+    }
     /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
@@ -306,6 +386,7 @@ public class Agenda extends JPanel {
         Date fecha = CalendarioAgenda.getMesSiguiente();
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
+
 
     }
 
