@@ -29,8 +29,8 @@ import javax.swing.JScrollPane;
 public class Agenda extends JPanel {
 
 
-	private static final long serialVersionUID = 1L;
-	//    public Object creador; //Que hace este objeto.
+    private static final long serialVersionUID = 1L;
+    //    public Object creador; //Que hace este objeto.
     static private JPanel panelcalendario;
     public Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
@@ -41,9 +41,12 @@ public class Agenda extends JPanel {
     protected final String[] diasdelasemana;
     protected EventosdeAgenda miObservado;
     protected DetectorEventosAgenda miObserver;
-    public   JScrollPane scroll ;
-    public final int CLICKTAREA =1 ;
-    public final int ClICKPANEL=2;
+    public JScrollPane scroll;
+    public final int CLICKTAREA = 1;
+    public final int ClICKPANEL = 2;
+    public final int INCMES     = 3;
+    public final int DECMES     = 4;
+
     /**
      * Constructor de Clase Agenda
      */
@@ -89,10 +92,13 @@ public class Agenda extends JPanel {
      * miObserver es el observador
      * miObservado es el sujeto y el sujeto es los paneles de la agenda
      * 
+     * @param arg
      **/
     public void addEscucharEventosAgenda(DetectorEventosAgenda arg) {
         miObserver = arg;
-        miObservado = new EventosdeAgenda();
+         if (miObservado == null)
+             miObservado = new EventosdeAgenda();
+              
         miObservado.addObserver(miObserver);
     }
 
@@ -210,69 +216,70 @@ public class Agenda extends JPanel {
      * @return Mes actual del calendario
      */
     public String MostrarMesActual(){
-       String result;
-        int month = CalendarioAgenda.getMesActual();
-        switch (month) {
+       String mesTexto;
+        int mes = CalendarioAgenda.getMesActual();
+        switch (mes) {
             case 0: {
-                result = "Enero";
+                mesTexto = "Enero";
                 break;
             }
             case 1: {
-                result = "Febrero";
+                mesTexto = "Febrero";
                 break;
             }
             case 2: {
-                result = "Marzo";
+                mesTexto = "Marzo";
                 break;
             }
             case 3: {
-                result = "Abril";
+                mesTexto = "Abril";
                 break;
             }
             case 4: {
-                result = "Mayo";
+                mesTexto = "Mayo";
                 break;
             }
             case 5: {
-                result = "Junio";
+                mesTexto = "Junio";
                 break;
             }
             case 6: {
-                result = "Julio";
+                mesTexto = "Julio";
                 break;
             }
             case 7: {
-                result = "Agosto";
+                mesTexto = "Agosto";
                 break;
             }
             case 8: {
-                result = "Septiembre";
+                mesTexto = "Septiembre";
                 break;
             }
             case 9: {
-                result = "Octubre";
+                mesTexto = "Octubre";
                 break;
             }
             case 10: {
-                result = "Noviembre";
+                mesTexto = "Noviembre";
                 break;
             }
             case 11: {
-                result = "Diciembre";
+                mesTexto = "Diciembre";
                 break;
             }
             default: {
-                result = "Error";
+                mesTexto = "Error";
                 break;
             }
         }
-        return result;
+        return mesTexto;
                
     }
     
     /**
      * MostrarAnnoActual()
      * 
+     * @return CalendarioAgenda.getAnnoActual()
      */
     public String MostrarAnnoActual(){
         return String.valueOf(CalendarioAgenda.getAnnoActual());
@@ -377,6 +384,7 @@ public class Agenda extends JPanel {
         Date fecha = CalendarioAgenda.getMesSiguiente();
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
+        
 
     }
 
