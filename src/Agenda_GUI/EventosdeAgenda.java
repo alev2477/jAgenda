@@ -55,4 +55,9 @@ public class EventosdeAgenda extends GeneradorEventos {
         notifyObservers();
     }
 
+    public void ActualizarFecha(){
+        setevento(5);
+        setChanged();
+        notifyObservers();
+    }
 }
