@@ -164,7 +164,7 @@ public class Agenda extends JPanel {
 
                         if (e.getSource() == panelday[i]) {
                             TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString();
-                            miObservado.clickonPanelDia(TareaSeleccionada);
+                            miObservado.EventoClickenPanelDia(TareaSeleccionada);
 
                         }
                     }
@@ -288,6 +288,14 @@ public class Agenda extends JPanel {
 
     }
     /**
+     * MostrarMesActual()
+     * 
+     * @return Mes actual del calendario
+     */
+//    public int MostrarMesActual(){
+//        return CalendarioAgenda.getMesActual();
+//    }
+    /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
      *
@@ -306,7 +314,7 @@ public class Agenda extends JPanel {
                     public void mouseClicked(MouseEvent e) {
                         TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
                                 + Lista1.getTarea() + " " + Lista1.getHora();
-                        miObservado.clickonTarea(TareaSeleccionada);
+                        miObservado.EventoClickonTarea(TareaSeleccionada);
                     }
                 });
 
@@ -388,18 +396,25 @@ public class Agenda extends JPanel {
          */
         
         Date fecha = CalendarioAgenda.getMesSiguiente();
-        CalendarioAgenda.setCalendario(fecha);
-        actualizarCalendario(UtilFuntions.Convertostring(fecha));
-
-
+//        CalendarioAgenda.setCalendario(fecha);
+//        actualizarCalendario(UtilFuntions.Convertostring(fecha));
+        actualizarCalendario(fecha);
+        miObservado.EventoIncrementarMes();
     }
 
     public void decrementarUnMes() {
 
         Date fecha = CalendarioAgenda.getMesAnterior();
+//        CalendarioAgenda.setCalendario(fecha);
+//        actualizarCalendario(UtilFuntions.Convertostring(fecha));
+        actualizarCalendario(fecha);
+        miObservado.EventoDecrementarMes();
+    }
+    
+    public void actualizarCalendario(Date fecha){
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
-
+        miObservado.EventoActualizarFecha();
     }
 
 }

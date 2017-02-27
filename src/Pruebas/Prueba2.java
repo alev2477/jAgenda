@@ -247,13 +247,21 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
 
   
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
-       
-     if(agenda1.getevento()==agenda1.ClICKPANEL)
-               jTexto1.setText(agenda1.getTareaString());
-     if(agenda1.getevento()==agenda1.CLICKTAREA)
-               jTexto2.setText(agenda1.getTareaString());
-     
-                       
+        if (agenda1.getevento() == agenda1.ClICKPANEL) {
+            jTexto1.setText(agenda1.getTareaString());
+        }
+        if (agenda1.getevento() == agenda1.CLICKTAREA) {
+            jTexto2.setText(agenda1.getTareaString());
+        }
+        if (agenda1.getevento() == agenda1.ACTFECHA)
+            System.out.println("agenda -> actualizando");
+        if (agenda1.getevento() == agenda1.DECMES)
+            System.out.println("agenda -> Boton Decrementar mes");
+        if (agenda1.getevento() == agenda1.INCMES)
+            System.out.println("agenda -> Boton Incrementar mes");
+        
+        
+
     }
-    
+
 }
