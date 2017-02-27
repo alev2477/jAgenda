@@ -30,7 +30,7 @@ public class Agenda extends JPanel {
 
 
     private static final long serialVersionUID = 1L;
-    //    public Object creador; //Que hace este objeto.
+    
     static private JPanel panelcalendario;
     public static Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
@@ -44,8 +44,8 @@ public class Agenda extends JPanel {
     public JScrollPane scroll;
     public final int CLICKTAREA = 1;
     public final int ClICKPANEL = 2;
-    public final int INCMES     = 3;
-    public final int DECMES     = 4;
+    public final int DECMES    = 3;
+    public final int INCMES      = 4;
     public final int ACTFECHA   = 5;
 
     /**
@@ -218,63 +218,8 @@ public class Agenda extends JPanel {
      * @return Mes actual del calendario
      */
     public String MostrarMesActual(){
-       String mesTexto;
-        int mes = CalendarioAgenda.getMesActual();
-        switch (mes) {
-            case 0: {
-                mesTexto = "Enero";
-                break;
-            }
-            case 1: {
-                mesTexto = "Febrero";
-                break;
-            }
-            case 2: {
-                mesTexto = "Marzo";
-                break;
-            }
-            case 3: {
-                mesTexto = "Abril";
-                break;
-            }
-            case 4: {
-                mesTexto = "Mayo";
-                break;
-            }
-            case 5: {
-                mesTexto = "Junio";
-                break;
-            }
-            case 6: {
-                mesTexto = "Julio";
-                break;
-            }
-            case 7: {
-                mesTexto = "Agosto";
-                break;
-            }
-            case 8: {
-                mesTexto = "Septiembre";
-                break;
-            }
-            case 9: {
-                mesTexto = "Octubre";
-                break;
-            }
-            case 10: {
-                mesTexto = "Noviembre";
-                break;
-            }
-            case 11: {
-                mesTexto = "Diciembre";
-                break;
-            }
-            default: {
-                mesTexto = "Error";
-                break;
-            }
-        }
-        return mesTexto;
+       
+        return CalendarioAgenda.MostrarMesActual();
 
     }
 

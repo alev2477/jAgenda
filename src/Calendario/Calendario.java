@@ -495,6 +495,66 @@ public class Calendario {
 
         }
     }
+    
+     public String MostrarMesActual(){
+       String mesTexto;
+        int mes = getMesActual();
+        switch (mes) {
+            case 0: {
+                mesTexto = "Enero";
+                break;
+            }
+            case 1: {
+                mesTexto = "Febrero";
+                break;
+            }
+            case 2: {
+                mesTexto = "Marzo";
+                break;
+            }
+            case 3: {
+                mesTexto = "Abril";
+                break;
+            }
+            case 4: {
+                mesTexto = "Mayo";
+                break;
+            }
+            case 5: {
+                mesTexto = "Junio";
+                break;
+            }
+            case 6: {
+                mesTexto = "Julio";
+                break;
+            }
+            case 7: {
+                mesTexto = "Agosto";
+                break;
+            }
+            case 8: {
+                mesTexto = "Septiembre";
+                break;
+            }
+            case 9: {
+                mesTexto = "Octubre";
+                break;
+            }
+            case 10: {
+                mesTexto = "Noviembre";
+                break;
+            }
+            case 11: {
+                mesTexto = "Diciembre";
+                break;
+            }
+            default: {
+                mesTexto = "Error";
+                break;
+            }
+        }
+        return mesTexto;
+     }
 
     
 }
