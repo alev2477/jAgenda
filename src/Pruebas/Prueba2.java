@@ -48,6 +48,8 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         paneldeControl1 = new Agenda_GUI.PaneldeControl();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jRegistrodeEventos = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +90,10 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
 
         jLabel3.setText("Hora");
 
+        jRegistrodeEventos.setColumns(20);
+        jRegistrodeEventos.setRows(5);
+        jScrollPane1.setViewportView(jRegistrodeEventos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,34 +104,41 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
                         .addGap(18, 18, 18)
                         .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
+                        .addGap(250, 250, 250)
                         .addComponent(paneldeControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jBoton1)
+                                .addComponent(jBoton3)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jBoton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1))
+                                            .addComponent(jBoton1)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel1))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel2)
+                                                    .addComponent(jTexto3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jTexto3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jTexto4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 49, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBoton2)
-                            .addComponent(jBoton3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(jLabel3)
+                                            .addComponent(jTexto4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 49, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,16 +155,18 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
                     .addComponent(jTexto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jBoton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBoton2)
-                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBoton2)
+                    .addComponent(jTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(jBoton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(31, 31, 31)
                 .addComponent(paneldeControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -221,6 +236,8 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextArea jRegistrodeEventos;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTexto1;
     private javax.swing.JTextField jTexto2;
     private javax.swing.JTextField jTexto3;
@@ -228,13 +245,15 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
     private Agenda_GUI.PaneldeControl paneldeControl1;
     // End of variables declaration//GEN-END:variables
 
-    @Override
+  
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
      if(agenda1.getevento()==agenda1.ClICKPANEL)
                jTexto1.setText(agenda1.getTareaString());
      if(agenda1.getevento()==agenda1.CLICKTAREA)
-               jTexto2.setText(agenda1.getTareaString());       
+               jTexto2.setText(agenda1.getTareaString());
+     
+                       
     }
     
 }
