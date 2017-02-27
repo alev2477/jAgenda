@@ -230,11 +230,15 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
 
     @Override
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     if(agenda1.getevento()==agenda1.ClICKPANEL)
-               jTexto1.setText(agenda1.getTareaString());
-     if(agenda1.getevento()==agenda1.CLICKTAREA)
-               jTexto2.setText(agenda1.getTareaString());       
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (agenda1.getevento() == agenda1.ClICKPANEL) {
+            jTexto1.setText(agenda1.getTareaString());
+        }
+        if (agenda1.getevento() == agenda1.CLICKTAREA) {
+            jTexto2.setText(agenda1.getTareaString());
+        }
+        if (agenda1.getevento() == agenda1.ACTFECHA)
+            System.out.println("agenda -> actualizando");
     }
-    
+
 }

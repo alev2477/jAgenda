@@ -18,19 +18,20 @@ public class EventosdeAgenda extends GeneradorEventos {
     public void setevento(int evento) {
         this.evento = evento;
     }
+      public String getTarea() {
+        return Tarea;
+    }
 
-    public void clickonTarea(String tarea) {
+    public void EventoClickonTarea(String tarea) {
         this.Tarea = tarea;
         setevento(1);
         setChanged();
         notifyObservers();
     }
 
-    public String getTarea() {
-        return Tarea;
-    }
+  
 
-    public void clickonPanelDia(String tarea) {
+    public void EventoClickenPanelDia(String tarea) {
         this.Tarea = tarea;
         setevento(2);
         setChanged();
@@ -39,7 +40,7 @@ public class EventosdeAgenda extends GeneradorEventos {
     /**
      * Evento que sucede luego de decrementar un mes
      */
-    public void decrementarMes(){
+    public void EventoDecrementarMes(){
         
         setevento(3);
         setChanged();
@@ -48,14 +49,14 @@ public class EventosdeAgenda extends GeneradorEventos {
      /**
      * Evento que sucede luego de incrementar un mes
      */
-    public void incrementarMes(){
+    public void EventoIncrementarMes(){
         
         setevento(4);
         setChanged();
         notifyObservers();
     }
 
-    public void ActualizarFecha(){
+    public void EventoActualizarFecha(){
         setevento(5);
         setChanged();
         notifyObservers();
