@@ -52,8 +52,13 @@ public class PaneldeControl extends JPanel implements ActionListener,DetectorEve
     
     public PaneldeControl() {
         crearGUI();
-            
+ 
    }
+    public void enlazar(Agenda agenda){
+    jagenda = agenda;
+    jTextoMes.setText(jagenda.MostrarMesActual());
+         jTextoAnno.setText(jagenda.MostrarAnnoActual());
+    }
     
     public PaneldeControl(Agenda agenda){
     
@@ -98,7 +103,7 @@ public class PaneldeControl extends JPanel implements ActionListener,DetectorEve
         panel_down.add(jBoton_IncrementarMes);
         this.add(panel_up);
         this.add(panel_down);
-        
+     
         this.setVisible(true);
     }
     

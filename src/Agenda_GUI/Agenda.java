@@ -32,7 +32,7 @@ public class Agenda extends JPanel {
     private static final long serialVersionUID = 1L;
     //    public Object creador; //Que hace este objeto.
     static private JPanel panelcalendario;
-    public Calendario CalendarioAgenda;
+    public static Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
     private String TareaSeleccionada;
     private final DiaPanel[] panelday = new DiaPanel[42];
@@ -295,6 +295,7 @@ public class Agenda extends JPanel {
      */
     public void MostrarTareasxDia(String Fecha) {
         final int indice = CalendarioAgenda.buscarfecha(Fecha);
+        ocultarTareasxDia(Fecha);
         ArrayList<Cita> Lista;
         if (indice > 0) {
             Lista = CalendarioAgenda.ListaTareasxDia(Fecha);
@@ -309,8 +310,7 @@ public class Agenda extends JPanel {
                     }
                 });
 
-                labelTareas.setFont(new Font(null,
-                        Font.LAYOUT_LEFT_TO_RIGHT, 10));
+                labelTareas.setFont(new Font(null,Font.LAYOUT_LEFT_TO_RIGHT, 10));
                 labelTareas.setForeground(Color.red);
                 labelTareas.setHorizontalAlignment(JLabel.LEFT);
                 TareaSeleccionada = Lista1.getHora() + " " + Lista1.getTarea();
@@ -382,7 +382,11 @@ public class Agenda extends JPanel {
     }
 
     public void incrementarUnMes() {
-
+        /**
+         * Aqui debemos de limpiar y liberar los recursos como en ocultar por
+         * dia o por mes 
+         */
+        
         Date fecha = CalendarioAgenda.getMesSiguiente();
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
