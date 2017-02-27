@@ -1,23 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Pruebas;
 import Agenda_GUI.GeneradorEventos;
 import Agenda_GUI.DetectorEventosAgenda;
-import Agenda_GUI.PaneldeControl;
+import java.util.ArrayList;
+
+
+
+
 /**
  *
  * @author alev2477
  */
 public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda {
-
+    private ArrayList<Cita> ListadodeTareas;
+    
   
     /**
      * Creates new form Prueba1
      */
     public Prueba2() {
+        
+        
         initComponents();
         
         
@@ -25,6 +28,11 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
         paneldeControl1.enlazar(agenda1);
         agenda1.addEscucharEventosAgenda(this);
         
+    }
+    
+    public void ListarTareas(){
+    
+    
     }
 
     /**
