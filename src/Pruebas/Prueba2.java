@@ -13,7 +13,7 @@ import Agenda_GUI.PaneldeControl;
  */
 public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda {
 
-    private PaneldeControl panelControl;
+  
     /**
      * Creates new form Prueba1
      */
@@ -21,10 +21,10 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
         initComponents();
         
         
-        panelControl = new PaneldeControl(agenda1);
+     
+        paneldeControl1.enlazar(agenda1);
         agenda1.addEscucharEventosAgenda(this);
-        jTextoMes.setText(agenda1.MostrarMesActual());
-        jTextAnno.setText(agenda1.MostrarAnnoActual());
+        
     }
 
     /**
@@ -47,10 +47,6 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jBdecMes = new javax.swing.JButton();
-        jBincMes = new javax.swing.JButton();
-        jTextoMes = new javax.swing.JTextField();
-        jTextAnno = new javax.swing.JTextField();
         paneldeControl1 = new Agenda_GUI.PaneldeControl();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,26 +88,6 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
 
         jLabel3.setText("Hora");
 
-        jBdecMes.setText("-mes");
-        jBdecMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBdecMesActionPerformed(evt);
-            }
-        });
-
-        jBincMes.setText("+mes");
-        jBincMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBincMesActionPerformed(evt);
-            }
-        });
-
-        jTextoMes.setEditable(false);
-        jTextoMes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jTextAnno.setEditable(false);
-        jTextAnno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,15 +98,7 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
                         .addGap(18, 18, 18)
                         .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jBdecMes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextAnno, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                            .addComponent(jTextoMes))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBincMes)
-                        .addGap(64, 64, 64)
+                        .addGap(279, 279, 279)
                         .addComponent(paneldeControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,22 +131,15 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTexto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTexto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBdecMes)
-                        .addComponent(jTextoMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBincMes, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTexto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTexto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jBoton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBoton2)
@@ -188,9 +149,9 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
                 .addComponent(jTexto2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(37, 37, 37)
                 .addComponent(paneldeControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(agenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -215,20 +176,6 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
     private void jTexto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTexto4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTexto4ActionPerformed
-
-    private void jBdecMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdecMesActionPerformed
-           
-        agenda1.decrementarUnMes();
-        jTextoMes.setText(agenda1.MostrarMesActual());
-        jTextAnno.setText(agenda1.MostrarAnnoActual());
-    }//GEN-LAST:event_jBdecMesActionPerformed
-
-    private void jBincMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBincMesActionPerformed
-        agenda1.incrementarUnMes();
-        jTextoMes.setText(agenda1.MostrarMesActual());
-        jTextAnno.setText(agenda1.MostrarAnnoActual());
-        
-    }//GEN-LAST:event_jBincMesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,20 +215,16 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Agenda_GUI.Agenda agenda1;
-    private javax.swing.JButton jBdecMes;
-    private javax.swing.JButton jBincMes;
     private javax.swing.JButton jBoton1;
     private javax.swing.JButton jBoton2;
     private javax.swing.JButton jBoton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextAnno;
     private javax.swing.JTextField jTexto1;
     private javax.swing.JTextField jTexto2;
     private javax.swing.JTextField jTexto3;
     private javax.swing.JTextField jTexto4;
-    private javax.swing.JTextField jTextoMes;
     private Agenda_GUI.PaneldeControl paneldeControl1;
     // End of variables declaration//GEN-END:variables
 
