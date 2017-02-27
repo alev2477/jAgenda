@@ -362,4 +362,9 @@ public class Agenda extends JPanel {
         miObservado.EventoActualizarFecha();
     }
 
+    
+    public void HacerCita(String fecha, String tarea, String hora){
+        CalendarioAgenda.Hacercita(fecha, tarea, hora);
+    
+    }
 }

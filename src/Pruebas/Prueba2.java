@@ -175,8 +175,7 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoton1ActionPerformed
-        agenda1.CalendarioAgenda.Hacercita(jTexto1.getText(), jTexto3.getText(), 
-                jTexto4.getText());
+        agenda1.HacerCita(jTexto1.getText(), jTexto3.getText(),jTexto4.getText());
         agenda1.MostrarTareasxDia(jTexto1.getText());
     }//GEN-LAST:event_jBoton1ActionPerformed
 
