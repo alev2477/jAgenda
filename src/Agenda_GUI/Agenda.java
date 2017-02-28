@@ -50,9 +50,7 @@ public class Agenda extends JPanel {
     public final int ACTFECHA   = 5;
     
     private ArrayList<Cita> ListadodeTareas; 
-    /**
-     * Constructor de Clase Agenda
-     */
+   
     public Agenda() {
         CalendarioAgenda = new Calendario();
         locale = Locale.getDefault();
@@ -60,24 +58,12 @@ public class Agenda extends JPanel {
         diasdelasemana = dateFormatSymbols.getShortWeekdays();
         mesesdelanno = dateFormatSymbols.getMonths();
         CalendarioAgenda.setCalendario();
-      //  CalendarioAgenda.printcalendar();
+      
         this.crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
-        //Creamos el listado de tareas
+        
         ListadodeTareas =  new ArrayList<>();
 
-      /*Favor eliminar toda esta basura  pronto*/
-//        addComponentListener(new java.awt.event.ComponentAdapter() {
-//            @Override
-//            public void componentResized(java.awt.event.ComponentEvent evt) {
-//                    ANCHO = getWidth();
-//                    ALTO = getHeight();
-//                    setSize(ANCHO, ALTO);
-//                    System.out.println("Se cambia ALTURA" + Integer.toString(ALTO)
-//                            + " " + "ANCHO " + Integer.toString(ANCHO));
-//                    panelcalendario.setPreferredSize(new Dimension(ALTO, ANCHO));
-//            }
-//        });
     }
 
     public int getevento() {
@@ -85,13 +71,6 @@ public class Agenda extends JPanel {
 
     }
 
-    public void setevento(int evento) {
-
-    }
-
-    public void addSujetoAgenda(EventosdeAgenda arg) {
-        miObservado = arg;
-    }
 
     /**
      * Se agrega al observador
@@ -179,18 +158,8 @@ public class Agenda extends JPanel {
 
             scroll = new JScrollPane(panelday[i]);
             scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            //scroll.setBounds(50, 30, 100, 30);
-
-
-//            scroll[i].setAutoscrolls(true);
-//            scroll[i].setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//            scroll[i].setViewportView(panelday[i]);
-//            panelday[i].setViewportView();
-            //panelcalendario.add(panelday[i]);
-             panelcalendario.add(scroll);
+            panelcalendario.add(scroll);
         }
-        /*Agregal el panel al JPanel que sirve de marco*/
-
         this.add(panelcalendario);
     }
 
@@ -223,8 +192,8 @@ public class Agenda extends JPanel {
      * @return Mes actual del calendario
      */
     public String MostrarMesActual(){
+       return  mesesdelanno[CalendarioAgenda.getMesActual()];
        
-        return CalendarioAgenda.MostrarMesActual();
 
     }
 
@@ -237,14 +206,7 @@ public class Agenda extends JPanel {
         return String.valueOf(CalendarioAgenda.getAnnoActual());
 
     }
-    /**
-     * MostrarMesActual()
-     * 
-     * @return Mes actual del calendario
-     */
-//    public int MostrarMesActual(){
-//        return CalendarioAgenda.getMesActual();
-//    }
+ 
     /**
      * Muestra las tareas programadas en esa fecha, para cada tarea asigna una
      * etiqueta y la agrega al panel del dia.
@@ -276,8 +238,8 @@ public class Agenda extends JPanel {
 //                panelday[indice].setViewportView(labelTareas);
                 panelday[indice].add(labelTareas);
                 panelday[indice].updateUI();
-                System.out.print(CalendarioAgenda.cMensual[indice].getFechaString() + " "
-                        + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
+//                System.out.print(CalendarioAgenda.cMensual[indice].getFechaString() + " "
+//                        + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
             }
         }
     }
@@ -340,23 +302,13 @@ public class Agenda extends JPanel {
     }
 
     public void incrementarUnMes() {
-        /**
-         * Aqui debemos de limpiar y liberar los recursos como en ocultar por
-         * dia o por mes 
-         */
-        
         Date fecha = CalendarioAgenda.getMesSiguiente();
-//        CalendarioAgenda.setCalendario(fecha);
-//        actualizarCalendario(UtilFuntions.Convertostring(fecha));
         actualizarCalendario(fecha);
         miObservado.EventoIncrementarMes();
     }
 
     public void decrementarUnMes() {
-
         Date fecha = CalendarioAgenda.getMesAnterior();
-//        CalendarioAgenda.setCalendario(fecha);
-//        actualizarCalendario(UtilFuntions.Convertostring(fecha));
         actualizarCalendario(fecha);
         miObservado.EventoDecrementarMes();
     }
@@ -382,7 +334,7 @@ public class Agenda extends JPanel {
     private void asignarCitas()
     {
         for (Cita cita : ListadodeTareas){
-            System.out.println(cita.getFecha() +" " +  cita.getTarea() + " " + cita.getHora());
+            
             HacerCita(cita.getFecha(), cita.getTarea(), cita.getHora());
             
             //888888888888888888888888888888888888888888888888

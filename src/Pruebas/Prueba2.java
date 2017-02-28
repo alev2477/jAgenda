@@ -327,6 +327,7 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
     // End of variables declaration//GEN-END:variables
 
   
+    @Override
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
         if (agenda1.getevento() == agenda1.ClICKPANEL) {
             jTexto1.setText(agenda1.getTareaString());
