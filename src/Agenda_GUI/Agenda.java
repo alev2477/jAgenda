@@ -39,6 +39,7 @@ public class Agenda extends JPanel {
     static int ALTO = 400, ANCHO = 750;
     protected Locale locale;
     protected final String[] diasdelasemana;
+    protected final String[] mesesdelanno;
     protected EventosdeAgenda miObservado;
     protected DetectorEventosAgenda miObserver;
     public JScrollPane scroll;
@@ -57,6 +58,7 @@ public class Agenda extends JPanel {
         locale = Locale.getDefault();
         DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
         diasdelasemana = dateFormatSymbols.getShortWeekdays();
+        mesesdelanno = dateFormatSymbols.getMonths();
         CalendarioAgenda.setCalendario();
       //  CalendarioAgenda.printcalendar();
         this.crearGUI();
