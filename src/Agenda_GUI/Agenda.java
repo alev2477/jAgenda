@@ -47,7 +47,8 @@ public class Agenda extends JPanel {
     public final int DECMES    = 3;
     public final int INCMES      = 4;
     public final int ACTFECHA   = 5;
-
+    
+    private ArrayList<Cita> ListadodeTareas; 
     /**
      * Constructor de Clase Agenda
      */
@@ -60,6 +61,8 @@ public class Agenda extends JPanel {
       //  CalendarioAgenda.printcalendar();
         this.crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
+        //Creamos el listado de tareas
+        ListadodeTareas =  new ArrayList<>();
 
       /*Favor eliminar toda esta basura  pronto*/
 //        addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -366,5 +369,22 @@ public class Agenda extends JPanel {
     public void HacerCita(String fecha, String tarea, String hora){
         CalendarioAgenda.Hacercita(fecha, tarea, hora);
     
+    }
+
+    public void aceptarListadeTareas(ArrayList<Cita> ListadodeTareas) {
+        this.ListadodeTareas = ListadodeTareas;
+        asignarCitas();
+        
+    }
+    
+    private void asignarCitas()
+    {
+        for (Cita cita : ListadodeTareas){
+            System.out.println(cita.getFecha() +" " +  cita.getTarea() + " " + cita.getHora());
+            HacerCita(cita.getFecha(), cita.getTarea(), cita.getHora());
+            
+            //888888888888888888888888888888888888888888888888
+            MostrarTareasxDia(cita.getFecha());
+        }
     }
 }
