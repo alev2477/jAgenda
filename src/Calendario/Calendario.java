@@ -432,7 +432,7 @@ public final class Calendario {
         return -1;
     }
 /**
- * public ArrayList<Cita> ListaTareasxDia(String Fecha)
+ * public ArrayList ListaTareasxDia(String Fecha)
  * Es empleada para tener la lista de tares por dia y sea empleada por
  * GUI
  * @param Fecha

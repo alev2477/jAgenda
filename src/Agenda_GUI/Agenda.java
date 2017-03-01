@@ -24,33 +24,85 @@ import javax.swing.JScrollPane;
  * @author alev2477 (Alejandro Villalobos)
  * @version 0.1
  * @since 2016
- * @email alev2477@gmail.com
+ * email alev2477@gmail.com
  */
 public class Agenda extends JPanel {
-
-
     private static final long serialVersionUID = 1L;
-    
     static private JPanel panelcalendario;
+
+    /**
+     *Calendario de la Agenda, procesa y devuelve el mes en formato calendario
+     */
     public static Calendario CalendarioAgenda;
     private javax.swing.JLabel labelTareas;
     private String TareaSeleccionada;
     private final DiaPanel[] panelday = new DiaPanel[42];
     static int ALTO = 400, ANCHO = 750;
+
+    /**
+     *
+     */
     protected Locale locale;
+
+    /**
+     *
+     */
     protected final String[] diasdelasemana;
+
+    /**
+     *
+     */
     protected final String[] mesesdelanno;
+
+    /**
+     *
+     */
     protected EventosdeAgenda miObservado;
+
+    /**
+     *
+     */
     protected DetectorEventosAgenda miObserver;
+
+    /**
+     *
+     */
     public JScrollPane scroll;
+
+    /**
+     *
+     */
     public final int CLICKTAREA = 1;
+
+    /**
+     *
+     */
     public final int ClICKPANEL = 2;
+
+    /**
+     *
+     */
     public final int DECMES    = 3;
+
+    /**
+     *
+     */
     public final int INCMES      = 4;
+
+    /**
+     *
+     */
     public final int ACTFECHA   = 5;
     
     private ArrayList<Cita> ListadodeTareas; 
-   
+    private ArrayList<ArrayList> ListadoMeses;
+    
+    /**
+     * Metodo constructor de clase Agenda
+     * Instancia el calendario con el cual se obtendrá las matrices de los dia del 
+     * mes que se esté trabajando
+     * Crea la interfaz grafica
+     */
     public Agenda() {
         CalendarioAgenda = new Calendario();
         locale = Locale.getDefault();
@@ -58,32 +110,33 @@ public class Agenda extends JPanel {
         diasdelasemana = dateFormatSymbols.getShortWeekdays();
         mesesdelanno = dateFormatSymbols.getMonths();
         CalendarioAgenda.setCalendario();
-      
-        this.crearGUI();
+        crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
-        
         ListadodeTareas =  new ArrayList<>();
-
     }
 
-    public int getevento() {
+    /**
+     * public int get_EventoAgenda()
+     *      Método get para obtener el evento que ha sucedido en agenda
+     * @return EventosdeAgenda
+     */
+    public int get_EventoAgenda() {
         return miObservado.getevento();
-
     }
 
 
     /**
-     * Se agrega al observador
-     * miObserver es el observador
-     * miObservado es el sujeto y el sujeto es los paneles de la agenda
-     *
-     * @param arg
+     * public void EscucharEventosDeAgenda()
+     * Método que agrega al observador en listado de observadores de los 
+     * eventos de agenda.
+     * Recibe DetectorEventosAgenda arg: Interfaz que implementa el metodo para
+     * procesar los eventos de agenda.
+     * @param  arg
      **/
-    public void addEscucharEventosAgenda(DetectorEventosAgenda arg) {
+    public void EscucharEventosDeAgenda(DetectorEventosAgenda arg) {
         miObserver = arg;
          if (miObservado == null)
              miObservado = new EventosdeAgenda();
-
         miObservado.addObserver(miObserver);
     }
 
@@ -181,6 +234,10 @@ public class Agenda extends JPanel {
         return panelday;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTareaString() {
         return TareaSeleccionada;
     }
@@ -301,30 +358,53 @@ public class Agenda extends JPanel {
         }
     }
 
-    public void incrementarUnMes() {
+    /**
+     *IncrementarUnMes actualiza la fecha con el mes siguiente
+     * actualiza el calendario con el nuevo mes
+     * Dispara evento de agenda para incrementar mes
+     */
+    public void IncrementarUnMes() {
         Date fecha = CalendarioAgenda.getMesSiguiente();
         actualizarCalendario(fecha);
         miObservado.EventoIncrementarMes();
     }
 
+    /**
+     * DecrementarUnMes actualiza la fecha con el mes anterior
+     * actualiza el calendario con el nuevo mes
+     * Dispara evento de agenda para Decrementar mes
+     */
     public void decrementarUnMes() {
         Date fecha = CalendarioAgenda.getMesAnterior();
         actualizarCalendario(fecha);
         miObservado.EventoDecrementarMes();
     }
     
+    /**
+     *
+     * @param fecha
+     */
     public void actualizarCalendario(Date fecha){
         CalendarioAgenda.setCalendario(fecha);
         actualizarCalendario(UtilFuntions.Convertostring(fecha));
         miObservado.EventoActualizarFecha();
     }
 
-    
+    /**
+     *
+     * @param fecha
+     * @param tarea
+     * @param hora
+     */
     public void HacerCita(String fecha, String tarea, String hora){
         CalendarioAgenda.Hacercita(fecha, tarea, hora);
     
     }
 
+    /**
+     *
+     * @param ListadodeTareas
+     */
     public void aceptarListadeTareas(ArrayList<Cita> ListadodeTareas) {
         this.ListadodeTareas = ListadodeTareas;
         asignarCitas();
@@ -341,4 +421,8 @@ public class Agenda extends JPanel {
             MostrarTareasxDia(cita.getFecha());
         }
     }
+    
+    
+    
+    
 }

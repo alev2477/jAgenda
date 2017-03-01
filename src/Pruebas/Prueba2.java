@@ -27,7 +27,7 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
         
      
         paneldeControl1.enlazar(agenda1);
-        agenda1.addEscucharEventosAgenda(this);
+        agenda1.EscucharEventosDeAgenda(this);
         
     }
     
@@ -329,17 +329,17 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
   
     @Override
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
-        if (agenda1.getevento() == agenda1.ClICKPANEL) {
+        if (agenda1.get_EventoAgenda() == agenda1.ClICKPANEL) {
             jTexto1.setText(agenda1.getTareaString());
         }
-        if (agenda1.getevento() == agenda1.CLICKTAREA) {
+        if (agenda1.get_EventoAgenda() == agenda1.CLICKTAREA) {
             jTexto2.setText(agenda1.getTareaString());
         }
-        if (agenda1.getevento() == agenda1.ACTFECHA)
+        if (agenda1.get_EventoAgenda() == agenda1.ACTFECHA)
             System.out.println("agenda -> actualizando");
-        if (agenda1.getevento() == agenda1.DECMES)
+        if (agenda1.get_EventoAgenda() == agenda1.DECMES)
             System.out.println("agenda -> Boton Decrementar mes");
-        if (agenda1.getevento() == agenda1.INCMES)
+        if (agenda1.get_EventoAgenda() == agenda1.INCMES)
             System.out.println("agenda -> Boton Incrementar mes");
         
         

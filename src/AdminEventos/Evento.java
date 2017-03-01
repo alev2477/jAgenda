@@ -5,8 +5,8 @@ import java.util.ArrayList;
 /**
  *
  * @author alev2477
- * @email alev2477@gmail.com
- * @date 14 abril 2016
+ * email alev2477@gmail.com
+ * date 14 abril 2016
  * @version 0.1
  * 
  */

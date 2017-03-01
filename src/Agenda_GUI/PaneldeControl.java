@@ -62,7 +62,7 @@ public class PaneldeControl extends JPanel implements ActionListener,DetectorEve
     
     public PaneldeControl(Agenda agenda){
     
-        agenda.addEscucharEventosAgenda(this);
+        agenda.EscucharEventosDeAgenda(this);
         jagenda=agenda;
      
          jTextoMes.setText(jagenda.MostrarMesActual());
@@ -108,7 +108,7 @@ public class PaneldeControl extends JPanel implements ActionListener,DetectorEve
     }
     
     public void jBotonIncMesActionPerformed(java.awt.event.ActionEvent evt){
-        this.jagenda.incrementarUnMes();
+        this.jagenda.IncrementarUnMes();
         this.jTextoMes.setText(PaneldeControl.jagenda.MostrarMesActual());
         this.jTextoAnno.setText(jagenda.MostrarAnnoActual());
         
@@ -125,7 +125,7 @@ public class PaneldeControl extends JPanel implements ActionListener,DetectorEve
 
     @Override
     public void EventoAgendaActuando(GeneradorEventos o, Object arg) {
-        if(jagenda.getevento()==jagenda.ACTFECHA)
+        if(jagenda.get_EventoAgenda()==jagenda.ACTFECHA)
         {
                jTextoMes.setText(jagenda.MostrarMesActual());
                jTextoAnno.setText(jagenda.MostrarAnnoActual());
