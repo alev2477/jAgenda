@@ -1,21 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Calendario;
 
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  *
  * @author Alejandro Villalobos email: alev2477@gmail.com fecha: 27-04-2015
  */
-public class Calendario {
+public final class Calendario {
 
     private GregorianCalendar calendario;
     private int mesactual;
@@ -23,26 +21,19 @@ public class Calendario {
     private int annoactual;
     private int primerdiadelmes;
     private int diadelasemana;
+    protected Locale locale;
     public Dia[] cMensual;
     private int DiasEnMes;
-
+    protected final String[] diasdelasemana;
     private int[] intVectorCalMes;
     private final int Tamano_Matriz = 43;
-    private static final String[] diasdelasemana = new String[]{
-        "dom",
-        "lun",
-        "mar",
-        "mie",
-        "jue",
-        "vie",
-        "sab"};
 
-    /**
-     *
-     */
     public Calendario() {
-//        actualizarfecha();
+        locale = Locale.getDefault();
+        DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+        diasdelasemana = dateFormatSymbols.getShortWeekdays();
         setCalendario();
+       
 
     }
 
@@ -54,11 +45,17 @@ public class Calendario {
         return DiasEnMes;
     }
 
-    public Calendario(int y) {
-    }
 
     public int getDiaSemana() {
         return this.diadelasemana;
+    }
+    
+    public int get_DiaenCalMensual(int indice){
+        return cMensual[indice].getintdia();
+    }
+    
+    public String get_FechaenCalMensual(int indice){
+    return cMensual[indice].getFechaString();
     }
 
     public void setDiaSemana(int dia) {
@@ -315,20 +312,7 @@ public class Calendario {
         return dia;
     }
 
-//    /**
-//     * *****************************************************************************
-//     * actualizarfecha(): carga fecha actual del sistema en el objeto DiaVector
-//     * ***************************************************************************
-//     */
-//    public void actualizarfecha() {
-//        calendario = new GregorianCalendar();
-//
-//        this.setDiaActual(calendario.get(Calendar.DATE));
-//        this.setMesActual(calendario.get(Calendar.MONTH));
-//        this.setAnnoActual(calendario.get(Calendar.YEAR));
-//
-//        setdiadelasemana(calendario.getTime());
-//    }
+
 
    public void setCalendario() {
         Date fecha;
@@ -386,16 +370,10 @@ public class Calendario {
 
         for (int j = 0; j < Tamano_Matriz - 1; j++) {
             cMensual[j] = new Dia();
-            /**
-             * **********************************************************************
-             */
             calendario.set(Calendar.DATE, this.getDiaActual());
             calendario.set(Calendar.MONTH, this.getMesActual());
             calendario.set(Calendar.YEAR, this.getAnnoActual());
 
-            /**
-             * **********************************************************************
-             */
             cMensual[j].setfecha(calendario.getTime());
             cMensual[j].setintdia(this.getDiaActual());
             intVectorCalMes[j] = (this.getDiaActual());
@@ -422,7 +400,8 @@ public class Calendario {
                  * Se le asigna un valor fuera de rango a J pero se puede usar c
                  * ualquier otro metodo para salir del for
                  */
-                break;
+                //break;
+                continue;
 
             }
         }
@@ -441,7 +420,7 @@ public class Calendario {
         int indice = buscarfecha(Fecha);
         if (indice > 0) {
             cMensual[indice].agregarNuevaTareaLista(Tarea, Hora);
-            System.out.println("Listo ya se registro la tarea\n");
+//            System.out.println("Listo ya se registro la tarea\n");
         }
 
     }
@@ -457,11 +436,11 @@ public class Calendario {
 
         }
 
-        System.out.println("Fecha No existe en calendario actual\n");
+//        System.out.println("Fecha No existe en calendario actual\n");
         return -1;
     }
 /**
- * public ArrayList<Cita> ListaTareasxDia(String Fecha)
+ * public ArrayList ListaTareasxDia(String Fecha)
  * Es empleada para tener la lista de tares por dia y sea empleada por
  * GUI
  * @param Fecha
@@ -496,65 +475,7 @@ public class Calendario {
         }
     }
     
-     public String MostrarMesActual(){
-       String mesTexto;
-        int mes = getMesActual();
-        switch (mes) {
-            case 0: {
-                mesTexto = "Enero";
-                break;
-            }
-            case 1: {
-                mesTexto = "Febrero";
-                break;
-            }
-            case 2: {
-                mesTexto = "Marzo";
-                break;
-            }
-            case 3: {
-                mesTexto = "Abril";
-                break;
-            }
-            case 4: {
-                mesTexto = "Mayo";
-                break;
-            }
-            case 5: {
-                mesTexto = "Junio";
-                break;
-            }
-            case 6: {
-                mesTexto = "Julio";
-                break;
-            }
-            case 7: {
-                mesTexto = "Agosto";
-                break;
-            }
-            case 8: {
-                mesTexto = "Septiembre";
-                break;
-            }
-            case 9: {
-                mesTexto = "Octubre";
-                break;
-            }
-            case 10: {
-                mesTexto = "Noviembre";
-                break;
-            }
-            case 11: {
-                mesTexto = "Diciembre";
-                break;
-            }
-            default: {
-                mesTexto = "Error";
-                break;
-            }
-        }
-        return mesTexto;
-     }
+    
 
     
 }
