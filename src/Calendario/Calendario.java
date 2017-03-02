@@ -49,6 +49,14 @@ public final class Calendario {
     public int getDiaSemana() {
         return this.diadelasemana;
     }
+    
+    public int get_DiaenCalMensual(int indice){
+        return cMensual[indice].getintdia();
+    }
+    
+    public String get_FechaenCalMensual(int indice){
+    return cMensual[indice].getFechaString();
+    }
 
     public void setDiaSemana(int dia) {
         this.diadelasemana = dia;

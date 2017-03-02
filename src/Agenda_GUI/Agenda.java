@@ -113,9 +113,9 @@ public class Agenda extends JPanel {
         CalendarioAgenda.setCalendario();
         crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
-        ListadodeTareas =  new ArrayList<>();
-        ListadoMeses = new ArrayList<>();
-        ListadeTareas_x_Mes = new ArrayList<>();
+        ListadodeTareas =  new ArrayList<Cita>();
+        ListadoMeses = new ArrayList<ArrayList>();
+        ListadeTareas_x_Mes = new ArrayList<Cita>();
     }
 
     /**
@@ -158,9 +158,11 @@ public class Agenda extends JPanel {
         }
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
+                //panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
+                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             } else {
-                panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
+                //panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
+                panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             }
         }
         updateUI();
@@ -182,12 +184,11 @@ public class Agenda extends JPanel {
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             panelday[i] = new DiaPanel();
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
-                        + Integer.toString(CalendarioAgenda.cMensual[i].
-                                getintdia()));
+                //panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
+                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             } else {
-                panelday[i].setdaylabel(Integer.
-                        toString(CalendarioAgenda.cMensual[i].getintdia()));
+                //panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
+                panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             }
 
             panelday[i].addMouseListener(new java.awt.event.MouseAdapter() {
@@ -197,7 +198,8 @@ public class Agenda extends JPanel {
                     for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
 
                         if (e.getSource() == panelday[i]) {
-                            TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString();
+                            //TareaSeleccionada = CalendarioAgenda.cMensual[i].getFechaString();
+                            TareaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(i);
                             miObservado.EventoClickenPanelDia(TareaSeleccionada);
 
                         }
@@ -278,7 +280,7 @@ public class Agenda extends JPanel {
                 labelTareas.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        TareaSeleccionada = CalendarioAgenda.cMensual[indice].getFechaString() + " "
+                        TareaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice) + " "
                                 + Lista1.getTarea() + " " + Lista1.getHora();
                         miObservado.EventoClickonTarea(TareaSeleccionada);
                     }
@@ -314,12 +316,10 @@ public class Agenda extends JPanel {
                 if (indice < 7) {
                     panelday[indice].setdaylabel(diasdelasemana[indice + 1]
                             + "  " + Integer.
-                            toString(CalendarioAgenda.cMensual[indice].
-                                    getintdia()));
+                            toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
                 } else {
                     panelday[indice].setdaylabel(Integer.
-                            toString(CalendarioAgenda.cMensual[indice].
-                                    getintdia()));
+                            toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
                 }
                 panelday[indice].repaint();
             }
