@@ -132,4 +132,9 @@ public final class Dia {
 
     }
 
+	public void LimpiarListaTareasporDia() {
+		ListaTareas.clear();
+		
+	}
+
 }

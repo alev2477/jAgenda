@@ -466,6 +466,14 @@ public final class Calendario {
         }
 
     }
+    
+    
+    public void limpiarListasTareasCalendario(){
+    	for(int i =0 ; i<= getdiaenmes();i++){
+    		cMensual[i].LimpiarListaTareasporDia();
+    	}
+    	
+    }
 
     public void imprimirTareasMes(String fecha) {
 

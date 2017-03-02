@@ -185,7 +185,7 @@ public class Agenda extends JPanel {
      * @param Fecha
      */
     public void actualizarCalendario(String Fecha) {
-        ocultarTareasxmes(null);
+        ocultarTareasxmes();
         try {
             CalendarioAgenda.setCalendario(Fecha);
         } catch (ParseException ex) {
@@ -334,16 +334,28 @@ public class Agenda extends JPanel {
             }
         }
     }
+    public void Limpiar_Agenda(){
+    	
+    	ocultarTareasxmes();
+    	LimpiarTareasCalendario();
+    	ListadeTareas_x_Mes.clear();
+    	ListadodeTareas.clear();
+    	ListadoMeses.clear();
+    	
+    	
+    }
+    private void LimpiarTareasCalendario(){
+    	CalendarioAgenda.limpiarListasTareasCalendario();
+    }
 
     /**
      * ocultarTareasxmes, quita todas las tareas del calendario
      *
-     * @param Fecha
+     *
      */
-    public void ocultarTareasxmes(String Fecha) {
+    public void ocultarTareasxmes() {
         int count = 0;
-        for (int indice = 0; indice <= CalendarioAgenda.getdiaenmes();
-                indice++) {
+        for (int indice = 0; indice <= CalendarioAgenda.getdiaenmes();indice++) {
             count = panelday[indice].getComponentCount();
             if (count > 1) {
                 panelday[indice].removeAll();
