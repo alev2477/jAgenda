@@ -264,6 +264,7 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         agenda1.aceptarListadeTareas(ListadodeTareas);
+        agenda1.leer_lista_meses();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

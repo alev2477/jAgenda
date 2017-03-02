@@ -95,7 +95,7 @@ public class Agenda extends JPanel {
     public final int ACTFECHA   = 5;
     
     private ArrayList<Cita> ListadodeTareas; 
-    private ArrayList<ArrayList> ListadoMeses;
+    private ArrayList<ArrayList<Cita>> ListadoMeses;
     private ArrayList<Cita> ListadeTareas_x_Mes;
     
     /**
@@ -114,9 +114,44 @@ public class Agenda extends JPanel {
         crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
         ListadodeTareas =  new ArrayList<Cita>();
-        ListadoMeses = new ArrayList<ArrayList>();
+        ListadoMeses = new ArrayList<ArrayList <Cita>>();
         ListadeTareas_x_Mes = new ArrayList<Cita>();
     }
+    private void iniciar_lista_meses(){
+    	Cita nuevacita = new Cita();
+    	nuevacita.addtarea("Correr", "12:00");
+    	nuevacita.setFecha("12/03/2017");
+    	
+    	ListadeTareas_x_Mes.add(nuevacita);
+    	ListadoMeses.add(ListadeTareas_x_Mes);
+    	
+    	nuevacita.addtarea("saltar", "15:00");
+    	nuevacita.setFecha("12/03/2017");
+    	ListadeTareas_x_Mes.add(nuevacita);
+    	
+    	nuevacita.addtarea("Comer", "12:00");
+    	nuevacita.setFecha("13/03/2017");
+    	ListadeTareas_x_Mes.add(nuevacita);
+    	ListadoMeses.add(ListadeTareas_x_Mes);
+    	
+    	
+    }
+    
+    public void leer_lista_meses(){
+    	iniciar_lista_meses();
+    	int indice=0;
+    	int i = 0;
+    	for(ArrayList<Cita> listatareas : ListadoMeses){
+    		System.out.println("mes: " + Integer.toString(indice)+"\n");
+    		for(Cita tareas : ListadeTareas_x_Mes){
+    			System.out.println(tareas.getFecha()+ " " + tareas.getTarea());
+    		}indice++;
+    		
+    	}
+    	
+    }
+    
+    
 
     /**
      * public int get_EventoAgenda()
