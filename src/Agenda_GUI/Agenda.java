@@ -96,6 +96,7 @@ public class Agenda extends JPanel {
     
     private ArrayList<Cita> ListadodeTareas; 
     private ArrayList<ArrayList> ListadoMeses;
+    private ArrayList<Cita> ListadeTareas_x_Mes;
     
     /**
      * Metodo constructor de clase Agenda
@@ -113,6 +114,8 @@ public class Agenda extends JPanel {
         crearGUI();
         panelcalendario.setPreferredSize(new Dimension(ANCHO, ALTO));
         ListadodeTareas =  new ArrayList<>();
+        ListadoMeses = new ArrayList<>();
+        ListadeTareas_x_Mes = new ArrayList<>();
     }
 
     /**
@@ -147,23 +150,17 @@ public class Agenda extends JPanel {
      * @param Fecha
      */
     public void actualizarCalendario(String Fecha) {
-
         ocultarTareasxmes(null);
         try {
             CalendarioAgenda.setCalendario(Fecha);
         } catch (ParseException ex) {
-            Logger.getLogger(Agenda.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "
-                        + Integer.toString(CalendarioAgenda.cMensual[i].
-                                getintdia()));
+                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
             } else {
-                panelday[i].setdaylabel(Integer.
-                        toString(CalendarioAgenda.cMensual[i].getintdia()));
+                panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.cMensual[i].getintdia()));
             }
         }
         updateUI();
