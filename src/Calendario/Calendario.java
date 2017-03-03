@@ -471,6 +471,9 @@ public final class Calendario {
         return cMensual[indice].getTareas();
    
     }
+    public ArrayList<Cita> ListaTareasxDia(int indice){
+        return cMensual[indice].getTareas();
+    }
 
     public void imprimirTareas(String fecha) {
         int indice = buscarfecha(fecha);

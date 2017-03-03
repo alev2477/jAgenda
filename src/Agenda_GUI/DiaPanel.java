@@ -11,30 +11,42 @@ import javax.swing.JPanel;
  */
 public class DiaPanel extends JPanel {
 
-    private JLabel daylabel;
-    
-     int HIGHT = 10,WIDTH = 10;
-     public final int HOY = 1;
-     public final int SELECCIONADO = 2;
+    private JLabel EtiquetaTareaDia;
+    private int IndiceTareaSeleccionada;
+
+    int HIGHT = 10, WIDTH = 10;
+    public final int HOY = 1;
+    public final int SELECCIONADO = 2;
     public final int NORMAL = 0;
+    public final int HOYSELECCIONADO = 3;
 
     public DiaPanel() {
 
         crear_IGU();
     }
 
+    public int obtener_IndiceTareaSeleccionada(){
+    return IndiceTareaSeleccionada;
+    }
     
+    public void asignar_IndiceTareaSeleccionada(int indice){
+        IndiceTareaSeleccionada =  indice;
+    }
 
     private void crear_IGU() {
        
-        daylabel = new JLabel();
+        EtiquetaTareaDia = new JLabel();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
   
         this.setBackground(Color.white);
         //this.setPreferredSize(new Dimension(HIGHT, WIDTH));
-        daylabel.setForeground(new java.awt.Color(255, 255, 255));
-        daylabel.setForeground(Color.blue);
-        this.add(daylabel);
+        EtiquetaTareaDia.setForeground(new java.awt.Color(255, 255, 255));
+        EtiquetaTareaDia.setForeground(Color.blue);
+        this.add(EtiquetaTareaDia);
+    }
+    
+    public JLabel obtener_jlabelEtiquetaTareaDia(){
+    return EtiquetaTareaDia;
     }
 
     public void resetdaylabel(){
@@ -42,11 +54,11 @@ public class DiaPanel extends JPanel {
     
     }
     public void setdaylabel(String day) {
-        daylabel.setText(day);
+        EtiquetaTareaDia.setText(day);
     }
 
     public String getdaylabel() {
-        return daylabel.getText();
+        return EtiquetaTareaDia.getText();
     }
     
     public DiaPanel getPanelDiaobj(){
@@ -54,19 +66,29 @@ public class DiaPanel extends JPanel {
     }
     
     public void asignar_ColorPanel(int conf){
-        if (conf == HOY)
-            setBackground(Color.yellow);
-        else 
-            if(conf == SELECCIONADO)
-                setBackground(Color.gray);
-            else 
-                if(conf == NORMAL)
+        if (conf == HOYSELECCIONADO) {
+            setBackground(Color.PINK);
+        } else {
+            if (conf == HOY) {
+                setBackground(Color.yellow);
+            } else {
+                if (conf == SELECCIONADO) {
+                    setBackground(Color.gray);
+                } else {
+                    if (conf == NORMAL) {
                         setBackground(Color.white);
-                    
-    
+                    }
+                }
+            }
+        }
+
     }
     public void actualizar_PanelDia(){
         
+    }
+
+    void asignar_EtiquetaTareaDia(JLabel labelTareas) {
+        this.EtiquetaTareaDia = labelTareas;
     }
     
     

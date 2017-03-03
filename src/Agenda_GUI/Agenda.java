@@ -36,9 +36,9 @@ public class Agenda extends JPanel {
      *Calendario de la Agenda, procesa y devuelve el mes en formato calendario
      */
     public static Calendario CalendarioAgenda;
-    private javax.swing.JLabel labelTareas;
+    private javax.swing.JLabel EtiquetadeTareas;
     private String TareaSeleccionada;
-    private final DiaPanel[] panelday = new DiaPanel[42];
+    private final DiaPanel[] panelDia = new DiaPanel[42];
     static int ALTO = 400, ANCHO = 750;
 
     /**
@@ -203,9 +203,9 @@ public class Agenda extends JPanel {
         }
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
+                panelDia[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             } else {
-                panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
+                panelDia[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             }
         }
         updateUI();
@@ -224,22 +224,21 @@ public class Agenda extends JPanel {
         panelcalendario.setSize(new Dimension(ANCHO, ALTO));
         panelcalendario.setBackground(Color.BLUE);
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
-            panelday[i] = new DiaPanel();
+            panelDia[i] = new DiaPanel();
             if (i < 7) {
-                panelday[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
+                panelDia[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
                 
             } 
             else {
-                panelday[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
+                panelDia[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             }
-//            if(i == CalendarioAgenda.obtener_intIndiceHoy())
-//                    panelday[i].asignar_ColorPanel(panelday[i].HOY);
+
             resaltar_Dia(i);
-            panelday[i].addMouseListener(new java.awt.event.MouseAdapter() {
+            panelDia[i].addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
-                        if (e.getSource() == panelday[i]) {
+                        if (e.getSource() == panelDia[i]) {
                             FechaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(i);
                             miObservado.EventoClickenPanelDia(FechaSeleccionada);
                             dia_seleccionado = i;
@@ -248,7 +247,7 @@ public class Agenda extends JPanel {
                     }
                 }
             });
-            scroll = new JScrollPane(panelday[i]);
+            scroll = new JScrollPane(panelDia[i]);
             scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
             panelcalendario.add(scroll);
         }
@@ -258,16 +257,26 @@ public class Agenda extends JPanel {
     public void resaltar_Dia(int indice) {
         
             if(dia_seleccionadoPrevio != -1)
-                panelday[dia_seleccionadoPrevio].asignar_ColorPanel(panelday[dia_seleccionadoPrevio].NORMAL);
+                panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
             if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
-                panelday[indice].asignar_ColorPanel(panelday[indice].HOY);
+            	if(indice == dia_seleccionado)
+                    panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+                else
+                    panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
             } else if (indice == dia_seleccionado) {
-                panelday[indice].asignar_ColorPanel(panelday[indice].SELECCIONADO);
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
+                panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
                 dia_seleccionadoPrevio = indice;
             } 
-            
-        
     }
+    
+    private void resaltar_TareaSeleccionada(int indice){
+      //  panelDia[indice].obtener_jlabelEtiquetaTareaDia().setBackground(Color.red);
+      ArrayList<Cita> Lista;
+      Lista = CalendarioAgenda.ListaTareasxDia(indice);
+      Lista.get(panelDia[indice].obtener_IndiceTareaSeleccionada());
+    }
+    
     
     /**
      * Retorna referencia al panelcalendario
@@ -284,7 +293,7 @@ public class Agenda extends JPanel {
      * @return
      */
     public DiaPanel[] getPaneldia() {
-        return panelday;
+        return panelDia;
     }
 
     /**
@@ -327,26 +336,32 @@ public class Agenda extends JPanel {
         if (indice >= 0) {
             Lista = CalendarioAgenda.ListaTareasxDia(Fecha);
             for (final Cita Lista1 : Lista) {
-                labelTareas = new javax.swing.JLabel();
+                EtiquetadeTareas = new javax.swing.JLabel();
                 resaltar_Dia(indice);
-                labelTareas.addMouseListener(new java.awt.event.MouseAdapter() {
+                EtiquetadeTareas.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
+                    //Evento de clickear en tarea
                     public void mouseClicked(MouseEvent e) {
                         TareaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice) + " "
                                 + Lista1.obtener_strTarea() + " " + Lista1.asignar_strHora();
                         FechaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice);
                         miObservado.EventoClickonTarea(TareaSeleccionada);
+                        resaltar_TareaSeleccionada(indice);
                         dia_seleccionado = indice;
                         resaltar_Dia(indice);
+                        panelDia[indice].asignar_IndiceTareaSeleccionada(Lista.indexOf(Lista1));
                     }
                 });
-                labelTareas.setFont(new Font(null,Font.LAYOUT_LEFT_TO_RIGHT, 10));
-                labelTareas.setForeground(Color.green);
-                labelTareas.setHorizontalAlignment(JLabel.LEFT);
+                EtiquetadeTareas.setFont(new Font(null,Font.LAYOUT_LEFT_TO_RIGHT, 10));
+                EtiquetadeTareas.setForeground(Color.black);
+                EtiquetadeTareas.setHorizontalAlignment(JLabel.LEFT);
                 TareaSeleccionada = Lista1.asignar_strHora() + " " + Lista1.obtener_strTarea();
-                labelTareas.setText(TareaSeleccionada);
-                panelday[indice].add(labelTareas);
-                panelday[indice].updateUI();
+                EtiquetadeTareas.setText(TareaSeleccionada);
+                panelDia[indice].asignar_EtiquetaTareaDia(EtiquetadeTareas);
+                panelDia[indice].add(EtiquetadeTareas);
+                panelDia[indice].obtener_jlabelEtiquetaTareaDia().setBackground(Color.red);
+                panelDia[indice].updateUI();
+                
             }
         }
     }
@@ -389,19 +404,19 @@ public class Agenda extends JPanel {
     public void ocultarTareasxmes() {
         int count = 0;
         for (int indice = 0; indice <= CalendarioAgenda.getdiaenmes();indice++) {
-            count = panelday[indice].getComponentCount();
+            count = panelDia[indice].getComponentCount();
             if (count > 1) {
-                panelday[indice].removeAll();
-                panelday[indice].resetdaylabel();
+                panelDia[indice].removeAll();
+                panelDia[indice].resetdaylabel();
                 if (indice < 7) {
-                    panelday[indice].setdaylabel(diasdelasemana[indice + 1]
+                    panelDia[indice].setdaylabel(diasdelasemana[indice + 1]
                             + "  " + Integer.
                             toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
                 } else {
-                    panelday[indice].setdaylabel(Integer.
+                    panelDia[indice].setdaylabel(Integer.
                             toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
                 }
-                panelday[indice].repaint();
+                panelDia[indice].repaint();
             }
         }
     }
@@ -417,16 +432,16 @@ public class Agenda extends JPanel {
     public void ocultarTareasxDia(String Fecha) {
         final int indice = CalendarioAgenda.buscarfecha(Fecha);
         if (indice >=0) {
-            int count = panelday[indice].getComponentCount();
+            int count = panelDia[indice].getComponentCount();
             if (count > 1) {
-                panelday[indice].removeAll();
-                panelday[indice].resetdaylabel();
+                panelDia[indice].removeAll();
+                panelDia[indice].resetdaylabel();
                 if (indice < 7) {
-                    panelday[indice].setdaylabel(diasdelasemana[indice + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
+                    panelDia[indice].setdaylabel(diasdelasemana[indice + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
                 } else {
-                    panelday[indice].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
+                    panelDia[indice].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(indice)));
                 }
-                panelday[indice].repaint();
+                panelDia[indice].repaint();
                 resaltar_Dia(indice);
             }
         }

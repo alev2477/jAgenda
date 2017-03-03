@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda {
     private ArrayList<Cita> ListadodeTareas;
     
-  
+   
     /**
      * Creates new form Prueba1
      */
@@ -28,7 +28,7 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
      
         paneldeControl1.enlazar(agenda1);
         agenda1.EscucharEventosDeAgenda(this);
-        
+        ListadodeTareas = new ArrayList<>();
     }
     
     /**
@@ -40,16 +40,18 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
      * 
      */
     
-    public ArrayList<Cita> ListarTareas(){
-        ListadodeTareas = new ArrayList<>();
+    public ArrayList<Cita> ListarTareas(String clase){
+       
         for(int j=0;j<10;j++){
             for (int i= 1; i<32;i++){
                 Cita cita = new Cita();
                 if(i < 10) cita.asignar_strFecha("0"+String.valueOf(i)+"/0"+ String.valueOf(j)+"/2017");
                 else
                     cita.asignar_strFecha(String.valueOf(i)+"/0"+ String.valueOf(j)+"/2017");
-                cita.agregar_strTarea("Comer", "12:00");
+                cita.agregar_strTarea(clase, "12:00");
                 ListadodeTareas.add(cita);
+                
+                
             }
         }
         return ListadodeTareas;
@@ -276,7 +278,11 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
     }//GEN-LAST:event_jTexto4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ListarTareas();
+       ListarTareas("Matematica");
+       ListarTareas("Ingles");
+       ListarTareas("Quimica");
+       ListarTareas("Fisica");
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
