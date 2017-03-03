@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Calendario;
 
 import java.util.Date;
@@ -27,11 +23,11 @@ public class Horario {
 
     }
 
-    public void setHora(String time) {
+    public void asignar_strHora(String time) {
         this.hora = time;
     }
 
-    public String getHora() {
+    public String obtener_strHora() {
         return this.hora;
     }
 

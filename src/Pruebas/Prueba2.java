@@ -45,10 +45,10 @@ public class Prueba2 extends javax.swing.JFrame implements DetectorEventosAgenda
         for(int j=0;j<10;j++){
             for (int i= 1; i<32;i++){
                 Cita cita = new Cita();
-                if(i < 10) cita.setFecha("0"+String.valueOf(i)+"/0"+ String.valueOf(j)+"/2017");
+                if(i < 10) cita.asignar_strFecha("0"+String.valueOf(i)+"/0"+ String.valueOf(j)+"/2017");
                 else
-                    cita.setFecha(String.valueOf(i)+"/0"+ String.valueOf(j)+"/2017");
-                cita.addtarea("Comer", "12:00");
+                    cita.asignar_strFecha(String.valueOf(i)+"/0"+ String.valueOf(j)+"/2017");
+                cita.agregar_strTarea("Comer", "12:00");
                 ListadodeTareas.add(cita);
             }
         }

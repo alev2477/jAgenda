@@ -312,7 +312,27 @@ public final class Calendario {
         return dia;
     }
 
-
+    public String obtener_strHoy(){
+        GregorianCalendar calendario;
+        Date fecha;
+        calendario = new GregorianCalendar();
+        fecha = calendario.getTime();
+        return UtilFuntions.Convertostring(fecha);
+    
+    }
+     public Date obtener_dateHoy(){
+        GregorianCalendar calendario;
+        Date fecha;
+        calendario = new GregorianCalendar();
+        fecha = calendario.getTime();
+        return fecha;
+    
+    }
+     public int obtener_intIndiceHoy(){
+         return buscarfecha(obtener_strHoy());
+     
+     }
+    
 
    public void setCalendario() {
         Date fecha;
@@ -461,7 +481,7 @@ public final class Calendario {
             for (Cita Lista1 : Lista) {
                 System.out.print("\n");
                 System.out.print(cMensual[indice].getFechaString() + " "
-                        + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
+                        + Lista1.obtener_strTarea() + " " + Lista1.asignar_strHora() + "\n");
             }
         }
 

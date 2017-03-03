@@ -69,7 +69,7 @@ public final class Dia {
      */
     public void agregarNuevaTareaLista(String Tarea, String Hora) {
         Cita NuevaTarea = new Cita();
-        NuevaTarea.addtarea(Tarea, Hora);
+        NuevaTarea.agregar_strTarea(Tarea, Hora);
         ListaTareas.add(NuevaTarea);
     }
 
