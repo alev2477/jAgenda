@@ -107,8 +107,8 @@ public class Agenda extends JPanel {
      * Crea la interfaz grafica
      */
     public Agenda() {
-        dia_seleccionado = 0;
-        dia_seleccionadoPrevio =0 ;
+        dia_seleccionado = -1;
+        dia_seleccionadoPrevio =-1 ;
         FechaSeleccionada = "";
         CalendarioAgenda = new Calendario();
         locale = Locale.getDefault();
@@ -257,7 +257,7 @@ public class Agenda extends JPanel {
 
     public void resaltar_Dia(int indice) {
         
-            if(dia_seleccionadoPrevio != 0)
+            if(dia_seleccionadoPrevio != -1)
                 panelday[dia_seleccionadoPrevio].asignar_ColorPanel(panelday[dia_seleccionadoPrevio].NORMAL);
             if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
                 panelday[indice].asignar_ColorPanel(panelday[indice].HOY);
@@ -324,7 +324,7 @@ public class Agenda extends JPanel {
         final int indice = CalendarioAgenda.buscarfecha(Fecha);
         ocultarTareasxDia(Fecha);
         ArrayList<Cita> Lista;
-        if (indice > 0) {
+        if (indice >= 0) {
             Lista = CalendarioAgenda.ListaTareasxDia(Fecha);
             for (final Cita Lista1 : Lista) {
                 labelTareas = new javax.swing.JLabel();
@@ -337,10 +337,11 @@ public class Agenda extends JPanel {
                         FechaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice);
                         miObservado.EventoClickonTarea(TareaSeleccionada);
                         dia_seleccionado = indice;
+                        resaltar_Dia(indice);
                     }
                 });
                 labelTareas.setFont(new Font(null,Font.LAYOUT_LEFT_TO_RIGHT, 10));
-                labelTareas.setForeground(Color.red);
+                labelTareas.setForeground(Color.green);
                 labelTareas.setHorizontalAlignment(JLabel.LEFT);
                 TareaSeleccionada = Lista1.asignar_strHora() + " " + Lista1.obtener_strTarea();
                 labelTareas.setText(TareaSeleccionada);
@@ -366,7 +367,7 @@ public class Agenda extends JPanel {
      * Para limpiar el dia, se debe determinar que dia esta seleccionado
      */
     public void Limpiar_Dia(){
-        if(dia_seleccionado > 0){
+        if(dia_seleccionado >= 0){
             ocultarTareasxDia(FechaSeleccionada);
             LimpiarTareasPorDia(dia_seleccionado);
             
@@ -415,7 +416,7 @@ public class Agenda extends JPanel {
      */
     public void ocultarTareasxDia(String Fecha) {
         final int indice = CalendarioAgenda.buscarfecha(Fecha);
-        if (indice > 0) {
+        if (indice >=0) {
             int count = panelday[indice].getComponentCount();
             if (count > 1) {
                 panelday[indice].removeAll();

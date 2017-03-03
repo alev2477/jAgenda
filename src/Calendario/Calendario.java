@@ -438,9 +438,9 @@ public final class Calendario {
 
     public void Hacercita(String Fecha, String Tarea, String Hora) {
         int indice = buscarfecha(Fecha);
-        if (indice > 0) {
+        if (indice >= 0) {
             cMensual[indice].agregarNuevaTareaLista(Tarea, Hora);
-//            System.out.println("Listo ya se registro la tarea\n");
+           System.out.println("Listo ya se registro la tarea\n");
         }
 
     }
