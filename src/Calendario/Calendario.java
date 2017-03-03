@@ -482,6 +482,10 @@ public final class Calendario {
 
         }
     }
+
+    public void limpiarListasTareasCalendarioPorDia(int indice) {
+        cMensual[indice].LimpiarListaTareasporDia();
+    }
     
     
 
