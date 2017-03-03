@@ -312,7 +312,27 @@ public final class Calendario {
         return dia;
     }
 
-
+    public String obtener_strHoy(){
+        GregorianCalendar calendario;
+        Date fecha;
+        calendario = new GregorianCalendar();
+        fecha = calendario.getTime();
+        return UtilFuntions.Convertostring(fecha);
+    
+    }
+     public Date obtener_dateHoy(){
+        GregorianCalendar calendario;
+        Date fecha;
+        calendario = new GregorianCalendar();
+        fecha = calendario.getTime();
+        return fecha;
+    
+    }
+     public int obtener_intIndiceHoy(){
+         return buscarfecha(obtener_strHoy());
+     
+     }
+    
 
    public void setCalendario() {
         Date fecha;
@@ -418,9 +438,9 @@ public final class Calendario {
 
     public void Hacercita(String Fecha, String Tarea, String Hora) {
         int indice = buscarfecha(Fecha);
-        if (indice > 0) {
+        if (indice >= 0) {
             cMensual[indice].agregarNuevaTareaLista(Tarea, Hora);
-//            System.out.println("Listo ya se registro la tarea\n");
+           System.out.println("Listo ya se registro la tarea\n");
         }
 
     }
@@ -461,10 +481,18 @@ public final class Calendario {
             for (Cita Lista1 : Lista) {
                 System.out.print("\n");
                 System.out.print(cMensual[indice].getFechaString() + " "
-                        + Lista1.getTarea() + " " + Lista1.getHora() + "\n");
+                        + Lista1.obtener_strTarea() + " " + Lista1.asignar_strHora() + "\n");
             }
         }
 
+    }
+    
+    
+    public void limpiarListasTareasCalendario(){
+    	for(int i =0 ; i<= getdiaenmes();i++){
+    		cMensual[i].LimpiarListaTareasporDia();
+    	}
+    	
     }
 
     public void imprimirTareasMes(String fecha) {
@@ -473,6 +501,10 @@ public final class Calendario {
             imprimirTareas(cMensual[i].getFechaString());
 
         }
+    }
+
+    public void limpiarListasTareasCalendarioPorDia(int indice) {
+        cMensual[indice].LimpiarListaTareasporDia();
     }
     
     
