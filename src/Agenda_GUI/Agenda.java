@@ -283,6 +283,8 @@ public class Agenda extends JPanel {
                         if (e.getSource() == panelDia[i]) {
                             FechaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(i);
                             miObservado.EventoClickenPanelDia(FechaSeleccionada);
+                            //dejar de resaltar etiqueta
+                            reiniciar_etiquetas_resaltadas();
                             dia_seleccionado = i;
                             resaltar_Dia(i);
                         }
@@ -320,10 +322,32 @@ public class Agenda extends JPanel {
             tareaSeleccionadaPrevia.asignar_IndicedeCalendario(indice);
             tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.TRUE);
         }
-
-
+        else
+        {
+            /*
+            normalizar las etiquetas anteriores
+             */
+            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(false);
+            //tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(Color.BLUE);
+            panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
+            panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.red);
+            tareaSeleccionadaPrevia.asignar_EtiquetaSeleccionada(panelDia[indice].obtener_EtiquetaSeleccionada());
+            tareaSeleccionadaPrevia.asignar_IndicedeCalendario(indice);
+            //El estado de etiqueta seleccionada se quita cuando se detecte un
+            //evento de click en panel o fuera de agenda
+            tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.TRUE);
+        }
     }
     
+    private void reiniciar_etiquetas_resaltadas(){
+        if(tareaSeleccionadaPrevia.obtener_EstadoSeleccionEtiqueta()){
+            tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.FALSE);
+            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(false);
+            tareaSeleccionadaPrevia.asignar_IndicedeCalendario(-1);
+        }
+            
+    
+    }
     
     /**
      * Retorna referencia al panelcalendario
@@ -399,10 +423,11 @@ public class Agenda extends JPanel {
                         Object etiqueta = e.getSource();
                         panelDia[indice].asignar_EtiquetaSeleccionada((JLabel) etiqueta);
                         
-                        resaltar_TareaSeleccionada(indice);
+                        
                         
                         dia_seleccionado = indice;
                         resaltar_Dia(indice);
+                        resaltar_TareaSeleccionada(indice);
                     }
                 });
                 
