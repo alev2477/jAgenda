@@ -13,6 +13,7 @@ public class DiaPanel extends JPanel {
 
     private JLabel EtiquetaTareaDia;
     private int IndiceTareaSeleccionada;
+    private JLabel EtiquetaSeleccionada;
 
     int HIGHT = 10, WIDTH = 10;
     public final int HOY = 1;
@@ -47,6 +48,13 @@ public class DiaPanel extends JPanel {
     
     public JLabel obtener_jlabelEtiquetaTareaDia(){
     return EtiquetaTareaDia;
+    }
+    
+    public JLabel obtener_EtiquetaSeleccionada(){
+        return EtiquetaSeleccionada;
+    }
+    public void asignar_EtiquetaSeleccionada(JLabel etiqueta){
+        EtiquetaSeleccionada = etiqueta;
     }
 
     public void resetdaylabel(){

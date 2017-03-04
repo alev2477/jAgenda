@@ -31,6 +31,7 @@ public class Agenda extends JPanel {
     static private JPanel panelcalendario;
     private int dia_seleccionado;
     private int dia_seleccionadoPrevio;
+    
     private String FechaSeleccionada;
     /**
      *Calendario de la Agenda, procesa y devuelve el mes en formato calendario
@@ -96,6 +97,45 @@ public class Agenda extends JPanel {
      */
     public final int ACTFECHA   = 5;
     
+    
+    
+    private class TareaSeleccionada{
+        private JLabel EtiquetaSeleccionada;
+        private Boolean AlgunaEtiquetaAunSeleccionada;
+        private int IndicedeCalendario;
+
+        public TareaSeleccionada() {
+            EtiquetaSeleccionada = new JLabel();
+            AlgunaEtiquetaAunSeleccionada = false;
+            IndicedeCalendario = -1;
+        }
+        
+        public void asignar_EtiquetaSeleccionada(JLabel etiqueta){
+            EtiquetaSeleccionada =  etiqueta;
+        }
+        public JLabel obtener_EtiquetaSeleccionada(){
+        return EtiquetaSeleccionada;
+        }
+        
+        public void asignar_EstadoSeleccionEtiqueta(Boolean opcion){
+            AlgunaEtiquetaAunSeleccionada = opcion;
+        }
+        
+        public Boolean obtener_EstadoSeleccionEtiqueta(){
+        
+        return AlgunaEtiquetaAunSeleccionada;
+        }
+
+        public int obtener_IndicedeCalendario() {
+            return IndicedeCalendario;
+        }
+
+        public void asignar_IndicedeCalendario(int IndicedeCalendario) {
+            this.IndicedeCalendario = IndicedeCalendario;
+        }
+    }
+    
+    private TareaSeleccionada tareaSeleccionadaPrevia;
     private ArrayList<Cita> ListadodeTareas; 
     private ArrayList<ArrayList<Cita>> ListadoMeses;
     private ArrayList<Cita> ListadeTareas_x_Mes;
@@ -107,8 +147,10 @@ public class Agenda extends JPanel {
      * Crea la interfaz grafica
      */
     public Agenda() {
+        tareaSeleccionadaPrevia = new TareaSeleccionada();
         dia_seleccionado = -1;
         dia_seleccionadoPrevio =-1 ;
+        
         FechaSeleccionada = "";
         CalendarioAgenda = new Calendario();
         locale = Locale.getDefault();
@@ -271,10 +313,15 @@ public class Agenda extends JPanel {
     }
     
     private void resaltar_TareaSeleccionada(int indice){
-      //  panelDia[indice].obtener_jlabelEtiquetaTareaDia().setBackground(Color.red);
-      ArrayList<Cita> Lista;
-      Lista = CalendarioAgenda.ListaTareasxDia(indice);
-      Lista.get(panelDia[indice].obtener_IndiceTareaSeleccionada());
+        if(!tareaSeleccionadaPrevia.obtener_EstadoSeleccionEtiqueta()){
+            panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
+            panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.red);
+            tareaSeleccionadaPrevia.asignar_EtiquetaSeleccionada(panelDia[indice].obtener_EtiquetaSeleccionada());
+            tareaSeleccionadaPrevia.asignar_IndicedeCalendario(indice);
+            tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.TRUE);
+        }
+
+
     }
     
     
@@ -342,24 +389,31 @@ public class Agenda extends JPanel {
                     @Override
                     //Evento de clickear en tarea
                     public void mouseClicked(MouseEvent e) {
-                        TareaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice) + " "
-                                + Lista1.obtener_strTarea() + " " + Lista1.asignar_strHora();
+                        TareaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice) + " "+ Lista1.obtener_strTarea() + " " + Lista1.asignar_strHora();
                         FechaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(indice);
                         miObservado.EventoClickonTarea(TareaSeleccionada);
+                        
+                        /*
+                        Averiguar quien es la etiqueta que se le dio click
+                        */
+                        Object etiqueta = e.getSource();
+                        panelDia[indice].asignar_EtiquetaSeleccionada((JLabel) etiqueta);
+                        
                         resaltar_TareaSeleccionada(indice);
+                        
                         dia_seleccionado = indice;
                         resaltar_Dia(indice);
-                        panelDia[indice].asignar_IndiceTareaSeleccionada(Lista.indexOf(Lista1));
                     }
                 });
+                
                 EtiquetadeTareas.setFont(new Font(null,Font.LAYOUT_LEFT_TO_RIGHT, 10));
                 EtiquetadeTareas.setForeground(Color.black);
+                
                 EtiquetadeTareas.setHorizontalAlignment(JLabel.LEFT);
                 TareaSeleccionada = Lista1.asignar_strHora() + " " + Lista1.obtener_strTarea();
                 EtiquetadeTareas.setText(TareaSeleccionada);
                 panelDia[indice].asignar_EtiquetaTareaDia(EtiquetadeTareas);
                 panelDia[indice].add(EtiquetadeTareas);
-                panelDia[indice].obtener_jlabelEtiquetaTareaDia().setBackground(Color.red);
                 panelDia[indice].updateUI();
                 
             }
