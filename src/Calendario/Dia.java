@@ -18,6 +18,7 @@ public final class Dia {
     private Date Fecha;
     private ArrayList<Cita> ListaTareas;
     private int intDia;
+    private boolean esDomingo;
 
     /**
      * Constructor sin parametro para hora actual
@@ -52,6 +53,16 @@ public final class Dia {
         /*Parametro String*/
 
     }
+
+    public boolean obtener_EsDomingo() {
+        return esDomingo;
+    }
+
+    public void asignar_EsDomingo(boolean esDomingo) {
+        this.esDomingo = esDomingo;
+    }
+    
+    
 
     public void setintdia(int dia) {
         intDia = dia;

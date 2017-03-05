@@ -1,6 +1,7 @@
 package Agenda_GUI;
 
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,7 +21,19 @@ public class DiaPanel extends JPanel {
     public final int SELECCIONADO = 2;
     public final int NORMAL = 0;
     public final int HOYSELECCIONADO = 3;
+     public final Color COLORBACKGROUND = Color.WHITE;
 
+    public final int DOMINGONORMAL = 4;
+    public int DOMINGOSELECCIONADO = 5;
+
+
+     
+     
+     /*Dia panel debe tener una lista mas eficiente que contenga las tareas y las
+     etiquetas asociadas al esas tareas
+     
+     */
+     
     public DiaPanel() {
 
         crear_IGU();
@@ -39,7 +52,7 @@ public class DiaPanel extends JPanel {
         EtiquetaTareaDia = new JLabel();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
   
-        this.setBackground(Color.white);
+        this.setBackground(COLORBACKGROUND);
         //this.setPreferredSize(new Dimension(HIGHT, WIDTH));
         EtiquetaTareaDia.setForeground(new java.awt.Color(255, 255, 255));
         EtiquetaTareaDia.setForeground(Color.blue);
@@ -75,17 +88,43 @@ public class DiaPanel extends JPanel {
     
     public void asignar_ColorPanel(int conf){
         if (conf == HOYSELECCIONADO) {
-            setBackground(Color.PINK);
+            //setBackground(Color.PINK);
+            setBackground(new Color(17,191,234));
+             setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(
+                             Color.red, 3), BorderFactory.createBevelBorder(1, Color.green, Color.BLUE)));
         } else {
             if (conf == HOY) {
-                setBackground(Color.yellow);
+                setBackground(new Color(17,191,234));
+                setBorder(BorderFactory.createEmptyBorder());
             } else {
                 if (conf == SELECCIONADO) {
-                    setBackground(Color.gray);
+
+                    //setBackground(Color.lightGray);
+                    setBackground(COLORBACKGROUND);
+                   // setBorder(BorderFactory.createMatteBorder(5,5,5,5,Color.red));
+                    //setBorder(BorderFactory.createBevelBorder(1, Color.red, Color.DARK_GRAY));
+                     setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(
+                             Color.red, 3), BorderFactory.createBevelBorder(1, Color.green, Color.BLUE)));
+
+                    
                 } else {
                     if (conf == NORMAL) {
+                        
                         setBackground(Color.white);
-                    }
+                        setBorder(BorderFactory.createEmptyBorder());
+                       
+                    }else
+                        if (conf == DOMINGONORMAL){
+                            setBackground(Color.lightGray);
+                        setBorder(BorderFactory.createEmptyBorder());}
+                        else 
+                        if(conf == DOMINGOSELECCIONADO){
+                            setBackground(Color.lightGray);
+                            setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(
+                             Color.red, 3), BorderFactory.createBevelBorder(1, Color.green, Color.BLUE)));
+                            
+                        }
+                            
                 }
             }
         }

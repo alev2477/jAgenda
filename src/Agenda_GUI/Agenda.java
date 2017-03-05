@@ -41,6 +41,7 @@ public class Agenda extends JPanel {
     private String TareaSeleccionada;
     private final DiaPanel[] panelDia = new DiaPanel[42];
     static int ALTO = 400, ANCHO = 750;
+    public final Color COLORBACKGROUND = Color.WHITE;
 
     /**
      *
@@ -103,13 +104,22 @@ public class Agenda extends JPanel {
         private JLabel EtiquetaSeleccionada;
         private Boolean AlgunaEtiquetaAunSeleccionada;
         private int IndicedeCalendario;
+        private Color ColorBackground;
 
         public TareaSeleccionada() {
             EtiquetaSeleccionada = new JLabel();
             AlgunaEtiquetaAunSeleccionada = false;
             IndicedeCalendario = -1;
         }
-        
+
+        public Color obtener_ColorBackground() {
+            return ColorBackground;
+        }
+
+        public void asignar_ColorBackground(Color ColorBackground) {
+            this.ColorBackground = ColorBackground;
+        }
+                
         public void asignar_EtiquetaSeleccionada(JLabel etiqueta){
             EtiquetaSeleccionada =  etiqueta;
         }
@@ -301,28 +311,42 @@ public class Agenda extends JPanel {
 
     public void resaltar_Dia(int indice) {
         
-            if(dia_seleccionadoPrevio != -1)
+        if (dia_seleccionadoPrevio != -1) {
+            
+            if (CalendarioAgenda.esDomingo(indice)) {
+                panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].DOMINGONORMAL);
+            } else {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
-            if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
-            	if(indice == dia_seleccionado)
-                   panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+            }
+        }
+
+        if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
+            if (indice == dia_seleccionado) {
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+            } else {
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
+            }
+        } else if (indice == dia_seleccionado) {
+            panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
+            panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
+            dia_seleccionadoPrevio = indice;
+        }else 
+            if (CalendarioAgenda.esDomingo(indice))
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGONORMAL);
                 
-                else
-                    panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
-            } else if (indice == dia_seleccionado) {
-                panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
-                panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
-                dia_seleccionadoPrevio = indice;
-            } 
+
     }
     
     private void resaltar_TareaSeleccionada(int indice){
         if(!tareaSeleccionadaPrevia.obtener_EstadoSeleccionEtiqueta()){
             panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
-            panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.green);
+            
+            
             tareaSeleccionadaPrevia.asignar_EtiquetaSeleccionada(panelDia[indice].obtener_EtiquetaSeleccionada());
             tareaSeleccionadaPrevia.asignar_IndicedeCalendario(indice);
             tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.TRUE);
+            tareaSeleccionadaPrevia.asignar_ColorBackground(panelDia[indice].obtener_EtiquetaSeleccionada().getBackground());
+            panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.green);
         }
         else
         {
@@ -330,14 +354,17 @@ public class Agenda extends JPanel {
             normalizar las etiquetas anteriores
              */
             //tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(false);
-            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(Color.LIGHT_GRAY);
+            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(
+            tareaSeleccionadaPrevia.obtener_ColorBackground());
             //tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(Color.BLUE);
             panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
             panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.red);
             tareaSeleccionadaPrevia.asignar_EtiquetaSeleccionada(panelDia[indice].obtener_EtiquetaSeleccionada());
             tareaSeleccionadaPrevia.asignar_IndicedeCalendario(indice);
+            tareaSeleccionadaPrevia.asignar_ColorBackground(panelDia[indice].getBackground());
             //El estado de etiqueta seleccionada se quita cuando se detecte un
             //evento de click en panel o fuera de agenda
+            
             tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.TRUE);
         }
     }
@@ -345,7 +372,11 @@ public class Agenda extends JPanel {
     private void reiniciar_etiquetas_resaltadas(){
         if(tareaSeleccionadaPrevia.obtener_EstadoSeleccionEtiqueta()){
             tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.FALSE);
-            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(false);
+            //tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(Color.LIGHT_GRAY);
+            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(
+                    tareaSeleccionadaPrevia.obtener_ColorBackground());
+            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(true);
+            
             tareaSeleccionadaPrevia.asignar_IndicedeCalendario(-1);
         }
             
@@ -411,6 +442,8 @@ public class Agenda extends JPanel {
             Lista = CalendarioAgenda.ListaTareasxDia(Fecha);
             for (final Cita Lista1 : Lista) {
                 EtiquetadeTareas = new javax.swing.JLabel();
+                EtiquetadeTareas.setBackground(panelDia[indice].getBackground());
+                EtiquetadeTareas.setOpaque(true);
                 resaltar_Dia(indice);
                 EtiquetadeTareas.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
