@@ -46,7 +46,7 @@ public final class Calendario {
     }
 
 
-    public int getDiaSemana() {
+    public int obtener_DiaSemana() {
         return this.diadelasemana;
     }
     
@@ -373,13 +373,13 @@ public final class Calendario {
         /*Se Obtiene la fecha del primero del mes dado*/
         fecha = primerodelmes(fecha);
         /*dia de la semana*/
-        int diasemana = this.getDiaSemana();
+        int diasemana = this.obtener_DiaSemana();
         /* Se obtendra el dia primero de la matriz
          se busca hasta sea domingo, ya que el calendario comenzara con domingo
          */
         while (diasemana != 1) {
             fecha = this.getdiaanterior(fecha);
-            diasemana = this.getDiaSemana();
+            diasemana = this.obtener_DiaSemana();
         }
         /*Una vez obtenido el domingo se tiene una fecha que no es mes de la fecha
          a buscar */
@@ -396,6 +396,13 @@ public final class Calendario {
 
             cMensual[j].setfecha(calendario.getTime());
             cMensual[j].setintdia(this.getDiaActual());
+            
+            if(obtener_DiaSemana()==1){
+                cMensual[j].asignar_EsDomingo(true);
+            }else cMensual[j].asignar_EsDomingo(false);
+            
+            
+            
             intVectorCalMes[j] = (this.getDiaActual());
 
             this.getdiasiguiente(fecha);
@@ -434,6 +441,12 @@ public final class Calendario {
     public int getTamanoMatrizactual() {
         return this.intVectorCalMes[Tamano_Matriz];
 
+    }
+    
+    public boolean esDomingo(int indice){
+        return cMensual[indice].obtener_EsDomingo();
+          
+        
     }
 
     public void Hacercita(String Fecha, String Tarea, String Hora) {

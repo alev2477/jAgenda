@@ -311,19 +311,30 @@ public class Agenda extends JPanel {
 
     public void resaltar_Dia(int indice) {
         
-            if(dia_seleccionadoPrevio != -1)
+        if (dia_seleccionadoPrevio != -1) {
+            
+            if (CalendarioAgenda.esDomingo(indice)) {
+                panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].DOMINGONORMAL);
+            } else {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
-            if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
-            	if(indice == dia_seleccionado)
-                   panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+            }
+        }
+
+        if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
+            if (indice == dia_seleccionado) {
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+            } else {
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
+            }
+        } else if (indice == dia_seleccionado) {
+            panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
+            panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
+            dia_seleccionadoPrevio = indice;
+        }else 
+            if (CalendarioAgenda.esDomingo(indice))
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGONORMAL);
                 
-                else
-                    panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
-            } else if (indice == dia_seleccionado) {
-                panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
-                panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
-                dia_seleccionadoPrevio = indice;
-            } 
+
     }
     
     private void resaltar_TareaSeleccionada(int indice){
