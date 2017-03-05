@@ -22,7 +22,9 @@ public class DiaPanel extends JPanel {
     public final int NORMAL = 0;
     public final int HOYSELECCIONADO = 3;
      public final Color COLORBACKGROUND = Color.WHITE;
+
     public final int DOMINGONORMAL = 4;
+
 
      
      
@@ -95,12 +97,14 @@ public class DiaPanel extends JPanel {
                 setBorder(BorderFactory.createEmptyBorder());
             } else {
                 if (conf == SELECCIONADO) {
+
                     //setBackground(Color.lightGray);
                     setBackground(COLORBACKGROUND);
                    // setBorder(BorderFactory.createMatteBorder(5,5,5,5,Color.red));
                     //setBorder(BorderFactory.createBevelBorder(1, Color.red, Color.DARK_GRAY));
                      setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(
                              Color.red, 3), BorderFactory.createBevelBorder(1, Color.green, Color.BLUE)));
+
                     
                 } else {
                     if (conf == NORMAL) {
