@@ -313,7 +313,7 @@ public class Agenda extends JPanel {
         
         if (dia_seleccionadoPrevio != -1) {
             
-            if (CalendarioAgenda.esDomingo(indice)) {
+            if (CalendarioAgenda.esDomingo(dia_seleccionadoPrevio)) {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].DOMINGONORMAL);
             } else {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
@@ -332,8 +332,10 @@ public class Agenda extends JPanel {
             dia_seleccionadoPrevio = indice;
         }else 
             if (CalendarioAgenda.esDomingo(indice))
+            {
                 panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGONORMAL);
-                
+            
+            }   
 
     }
     
