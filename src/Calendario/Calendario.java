@@ -440,7 +440,7 @@ public final class Calendario {
         int indice = buscarfecha(Fecha);
         if (indice >= 0) {
             cMensual[indice].agregarNuevaTareaLista(Tarea, Hora);
-           System.out.println("Listo ya se registro la tarea\n");
+          // System.out.println("Listo ya se registro la tarea\n");
         }
 
     }
