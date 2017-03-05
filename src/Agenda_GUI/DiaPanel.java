@@ -20,6 +20,7 @@ public class DiaPanel extends JPanel {
     public final int SELECCIONADO = 2;
     public final int NORMAL = 0;
     public final int HOYSELECCIONADO = 3;
+     public final Color COLORBACKGROUND = Color.WHITE;
 
     public DiaPanel() {
 
@@ -39,7 +40,7 @@ public class DiaPanel extends JPanel {
         EtiquetaTareaDia = new JLabel();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
   
-        this.setBackground(Color.white);
+        this.setBackground(COLORBACKGROUND);
         //this.setPreferredSize(new Dimension(HIGHT, WIDTH));
         EtiquetaTareaDia.setForeground(new java.awt.Color(255, 255, 255));
         EtiquetaTareaDia.setForeground(Color.blue);
@@ -81,7 +82,9 @@ public class DiaPanel extends JPanel {
                 setBackground(Color.yellow);
             } else {
                 if (conf == SELECCIONADO) {
-                    setBackground(Color.gray);
+                    setBackground(Color.lightGray);
+                    //setBackground(COLORBACKGROUND);
+                    
                 } else {
                     if (conf == NORMAL) {
                         setBackground(Color.white);
