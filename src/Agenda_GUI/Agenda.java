@@ -284,9 +284,10 @@ public class Agenda extends JPanel {
                             FechaSeleccionada = CalendarioAgenda.get_FechaenCalMensual(i);
                             miObservado.EventoClickenPanelDia(FechaSeleccionada);
                             //dejar de resaltar etiqueta
-                            reiniciar_etiquetas_resaltadas();
+                            
                             dia_seleccionado = i;
                             resaltar_Dia(i);
+                            reiniciar_etiquetas_resaltadas();
                         }
                     }
                 }
@@ -304,7 +305,8 @@ public class Agenda extends JPanel {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
             if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
             	if(indice == dia_seleccionado)
-                    panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+                   panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
+                
                 else
                     panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
             } else if (indice == dia_seleccionado) {
@@ -317,7 +319,7 @@ public class Agenda extends JPanel {
     private void resaltar_TareaSeleccionada(int indice){
         if(!tareaSeleccionadaPrevia.obtener_EstadoSeleccionEtiqueta()){
             panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
-            panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.red);
+            panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.green);
             tareaSeleccionadaPrevia.asignar_EtiquetaSeleccionada(panelDia[indice].obtener_EtiquetaSeleccionada());
             tareaSeleccionadaPrevia.asignar_IndicedeCalendario(indice);
             tareaSeleccionadaPrevia.asignar_EstadoSeleccionEtiqueta(Boolean.TRUE);
@@ -327,7 +329,8 @@ public class Agenda extends JPanel {
             /*
             normalizar las etiquetas anteriores
              */
-            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(false);
+            //tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setOpaque(false);
+            tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(Color.LIGHT_GRAY);
             //tareaSeleccionadaPrevia.obtener_EtiquetaSeleccionada().setBackground(Color.BLUE);
             panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
             panelDia[indice].obtener_EtiquetaSeleccionada().setBackground(Color.red);
