@@ -328,7 +328,7 @@ public class Agenda extends JPanel {
             }
         } else if (indice == dia_seleccionado) {
             panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
-            panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
+           // panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
             dia_seleccionadoPrevio = indice;
         }else 
             if (CalendarioAgenda.esDomingo(indice))
