@@ -315,7 +315,8 @@ public class Agenda extends JPanel {
     }
 
     public void resaltar_Dia(int indice) {
-        
+        //No hay ningun dia que haya sido resaltado por haber sido seleccionado
+        //Se muestra los estados normales de los dias,
         if (dia_seleccionadoPrevio != -1) {
             
             if (CalendarioAgenda.esDomingo(dia_seleccionadoPrevio)) {
@@ -324,8 +325,12 @@ public class Agenda extends JPanel {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
             }
         }
-        mes_actual = CalendarioAgenda.getMesActual();
-        System.out.println("Mes actual: " + Integer.toString(mes_actual)+ "MEs Hoy " + Integer.toString(CalendarioAgenda.obtener_mesdeHoy()));
+        
+        //Si el dia es HOY y si HOY es seleccionado
+        //sino si es un dia normal seleccionado
+        //sino el dia es norma
+        //mes_actual = CalendarioAgenda.getMesActual();
+        //System.out.println("Mes actual: " + Integer.toString(mes_actual)+ "MEs Hoy " + Integer.toString(CalendarioAgenda.obtener_mesdeHoy()));
         //if (indice == CalendarioAgenda.obtener_intIndiceHoy()&& mes_actual== CalendarioAgenda.obtener_mesdeHoy()) {
         if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
             if (indice == dia_seleccionado) {
@@ -333,25 +338,33 @@ public class Agenda extends JPanel {
             } else {
                 panelDia[indice].asignar_ColorPanel(panelDia[indice].HOY);
             }
-        } else if (indice == dia_seleccionado) {
-            panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
-            if(CalendarioAgenda.obtener_intIndiceHoy()!=-1)
-                 panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
-            dia_seleccionadoPrevio = indice;
-        }else {
+        } else 
+            if (CalendarioAgenda.esDomingo(indice)){
+                if(indice == dia_seleccionado)
+                {
+                    panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGOSELECCIONADO);
+                    dia_seleccionadoPrevio = indice;
+                }
+                else 
+                    panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGONORMAL);
+            }
+            else
+            if (indice == dia_seleccionado) {
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].SELECCIONADO);
             
-            if (CalendarioAgenda.esDomingo(indice))
-            {
-                panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGONORMAL);
-            
-            }else // el dia es normal
+                if(CalendarioAgenda.obtener_intIndiceHoy()!=-1)
+                    panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
+                dia_seleccionadoPrevio = indice;
+                   // Ninguno es seleccionado
+            }else {
+                // el dia es normal
                 panelDia[indice].asignar_ColorPanel(panelDia[indice].NORMAL);
-            
-        }
+                }
 
     }
     
     private void resaltar_TareaSeleccionada(int indice){
+        
         if(!tareaSeleccionadaPrevia.obtener_EstadoSeleccionEtiqueta()){
             panelDia[indice].obtener_EtiquetaSeleccionada().setOpaque(true);
             
