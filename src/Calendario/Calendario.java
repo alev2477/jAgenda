@@ -320,6 +320,14 @@ public final class Calendario {
         return UtilFuntions.Convertostring(fecha);
     
     }
+    
+    
+    public int obtener_mesdeHoy(){
+         GregorianCalendar calendario = new GregorianCalendar();
+         return calendario.get(calendario.MONTH);
+    }
+    
+    
      public Date obtener_dateHoy(){
         GregorianCalendar calendario;
         Date fecha;

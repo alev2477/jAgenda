@@ -31,6 +31,7 @@ public class Agenda extends JPanel {
     static private JPanel panelcalendario;
     private int dia_seleccionado;
     private int dia_seleccionadoPrevio;
+    private int mes_actual;
     
     private String FechaSeleccionada;
     /**
@@ -259,6 +260,10 @@ public class Agenda extends JPanel {
             } else {
                 panelDia[i].setdaylabel(Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
             }
+            dia_seleccionado= -1;
+            dia_seleccionadoPrevio = -1;
+            
+            resaltar_Dia(i);
         }
         updateUI();
     }
@@ -319,7 +324,9 @@ public class Agenda extends JPanel {
                 panelDia[dia_seleccionadoPrevio].asignar_ColorPanel(panelDia[dia_seleccionadoPrevio].NORMAL);
             }
         }
-
+        mes_actual = CalendarioAgenda.getMesActual();
+        System.out.println("Mes actual: " + Integer.toString(mes_actual)+ "MEs Hoy " + Integer.toString(CalendarioAgenda.obtener_mesdeHoy()));
+        //if (indice == CalendarioAgenda.obtener_intIndiceHoy()&& mes_actual== CalendarioAgenda.obtener_mesdeHoy()) {
         if (indice == CalendarioAgenda.obtener_intIndiceHoy()) {
             if (indice == dia_seleccionado) {
                 panelDia[indice].asignar_ColorPanel(panelDia[indice].HOYSELECCIONADO);
@@ -331,12 +338,16 @@ public class Agenda extends JPanel {
             if(CalendarioAgenda.obtener_intIndiceHoy()!=-1)
                  panelDia[CalendarioAgenda.obtener_intIndiceHoy()].asignar_ColorPanel(panelDia[CalendarioAgenda.obtener_intIndiceHoy()].HOY);
             dia_seleccionadoPrevio = indice;
-        }else 
+        }else {
+            
             if (CalendarioAgenda.esDomingo(indice))
             {
                 panelDia[indice].asignar_ColorPanel(panelDia[indice].DOMINGONORMAL);
             
-            }   
+            }else // el dia es normal
+                panelDia[indice].asignar_ColorPanel(panelDia[indice].NORMAL);
+            
+        }
 
     }
     
