@@ -5,17 +5,17 @@
             <url>src/Agenda_GUI/Agenda.java</url>
             <bookmark id="2">
                 <name/>
-                <line>421</line>
+                <line>424</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/alev2477/NetBeansProjects/jAgenda/src/Agenda_GUI/Agenda.java</file>
-            <file>file:/home/alev2477/NetBeansProjects/jAgenda/src/Calendario/Calendario.java</file>
-            <file>file:/home/alev2477/NetBeansProjects/jAgenda/src/Pruebas/Prueba2.java</file>
-            <file>file:/home/alev2477/NetBeansProjects/jAgenda/src/Agenda_GUI/DiaPanel.java</file>
+            <file>file:/home/alev2477/workspace/jAgenda/src/Calendario/Calendario.java</file>
+            <file>file:/home/alev2477/workspace/jAgenda/src/Agenda_GUI/DiaPanel.java</file>
+            <file>file:/home/alev2477/workspace/jAgenda/src/Pruebas/Prueba2.java</file>
+            <file>file:/home/alev2477/workspace/jAgenda/src/Agenda_GUI/Agenda.java</file>
         </group>
     </open-files>
 </project-private>

@@ -279,7 +279,7 @@ public class Agenda extends JPanel {
             panelcalendario.setLayout(new GridLayout(5, 7, 1, 1));
         }
         panelcalendario.setSize(new Dimension(ANCHO, ALTO));
-        panelcalendario.setBackground(Color.BLUE);
+        panelcalendario.setBackground(Color.white);
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             panelDia[i] = new DiaPanel();
             if (i < 7) {
