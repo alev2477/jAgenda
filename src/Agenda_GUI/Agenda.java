@@ -3,10 +3,14 @@ package Agenda_GUI;
 import Calendario.Calendario;
 import Calendario.Cita;
 import Calendario.UtilFuntions;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.MouseEvent;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -15,6 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,6 +34,7 @@ import javax.swing.JScrollPane;
 public class Agenda extends JPanel {
     private static final long serialVersionUID = 1L;
     static private JPanel panelcalendario;
+    static private JPanel panel;
     private int dia_seleccionado;
     private int dia_seleccionadoPrevio;
     private int mes_actual;
@@ -279,9 +285,11 @@ public class Agenda extends JPanel {
             panelcalendario.setLayout(new GridLayout(5, 7, 1, 1));
         }
         panelcalendario.setSize(new Dimension(ANCHO, ALTO));
-        panelcalendario.setBackground(Color.white);
+        panelcalendario.setBackground(Color.red);
         for (int i = 0; i <= CalendarioAgenda.getdiaenmes(); i++) {
             panelDia[i] = new DiaPanel();
+            panel = new JPanel(new GridBagLayout());
+            
             if (i < 7) {
                 panelDia[i].setdaylabel(diasdelasemana[i + 1] + "  "+ Integer.toString(CalendarioAgenda.get_DiaenCalMensual(i)));
                 
@@ -309,7 +317,13 @@ public class Agenda extends JPanel {
             });
             scroll = new JScrollPane(panelDia[i]);
             scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            panelcalendario.add(scroll);
+            
+            panel.setLayout(new BorderLayout(0, 0));
+            panel.add(panelDia[i]);
+           // panel.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            panel.setSize(new Dimension(100,100));
+            panel.setBackground(Color.white);
+            panelcalendario.add(panel);
         }
         this.add(panelcalendario);
     }
