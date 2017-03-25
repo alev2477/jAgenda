@@ -21,11 +21,11 @@ import javax.swing.JTextField;
 public class PaneldeControl extends JPanel implements ActionListener,DetectorEventosAgenda{
     private JButton jBoton_decrementarMes, jBoton_IncrementarMes;
     private JPanel panel_up, panel_down;
-    private static JTextField jTextoMes, jTextoAnno;
+    private  JTextField jTextoMes, jTextoAnno;
    // private EventosdeAgenda Eventos;
 
     private EventosdeAgenda eventos;
-    protected  static Agenda jagenda;
+    protected   Agenda jagenda;
 
     /**
      * Get the value of eventos
@@ -109,14 +109,14 @@ public class PaneldeControl extends JPanel implements ActionListener,DetectorEve
     
     public void jBotonIncMesActionPerformed(java.awt.event.ActionEvent evt){
         this.jagenda.IncrementarUnMes();
-        this.jTextoMes.setText(PaneldeControl.jagenda.MostrarMesActual());
+        this.jTextoMes.setText(jagenda.MostrarMesActual());
         this.jTextoAnno.setText(jagenda.MostrarAnnoActual());
         
     }
     
      public void jBotonDecMesActionPerformed(java.awt.event.ActionEvent evt){
          this.jagenda.decrementarUnMes();
-          this.jTextoMes.setText(PaneldeControl.jagenda.MostrarMesActual());
+          this.jTextoMes.setText(jagenda.MostrarMesActual());
         this.jTextoAnno.setText(jagenda.MostrarAnnoActual());
         
     }
